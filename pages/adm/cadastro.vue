@@ -24,10 +24,6 @@
                     <label for="confirmsenha" class="block text-sm font-medium text-gray-700">Confirmar Senha</label>
                     <input type="password">
                 </div>
-                <div class="mb-4">
-                    <label for="plano" class="block text-sm font-medium text-gray-700">Plano</label>
-                    <input type="text">
-                </div>
             </form>
         </div>
     </div>
