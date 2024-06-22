@@ -20,9 +20,15 @@
 </template>
 
 <script>
-    const { data, pending, error, refresh } = await useFetch('()',{
-        
-    })
+    const signIn = async (user) => {
+   user.value = await $fetch('http://localhost:8006/login', {
+     method: 'post',
+     body: {
+       email: 'test@test.dk',
+       password: 'test'
+     }
+   })
+ }
 export default {
     setup () {
         
