@@ -76,6 +76,7 @@
            width: 100%;
            border-radius: 0px 8px 8px 0px;
        }
+       
 </style>
   
   <script lang="ts">
