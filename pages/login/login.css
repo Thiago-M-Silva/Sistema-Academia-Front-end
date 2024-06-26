@@ -1,0 +1,48 @@
+.primary-bg {
+    background-color: #222366;
+}
+
+
+.primary-text {
+    color: #222366;
+}
+
+
+.secondary-bg {
+    background-color: #6b6c8c; /* Cor secundária */
+}
+
+
+.secondary-text {
+    color: #6b6c8c; /* Cor do texto secundário */
+}
+
+
+.tint-1-bg {
+    background-color: #484973; /* Tons mais claros para background */
+}
+
+
+.tint-1-text {
+    color: #484973; /* Tons mais claros para texto */
+}
+
+
+.tint-2-bg {
+    background-color: #151632; /* Tons mais escuros para background */
+}
+
+
+.tint-2-text {
+    color: #151632; /* Tons mais escuros para texto */
+}
+
+
+#login-illustration {
+    background-image: url("https://r4.wallpaperflare.com/wallpaper/199/924/33/muscle-muscle-bodybuilding-press-wallpaper-5e83ab4709bbfda7c62378900524157e.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    border-radius: 0px 8px 8px 0px;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bora Maromba</title>
+    
+    <!-- Imndo todas as dependências comuns -->
+    <script src="/imports/estilo/tailwind.css"></script>
+
+
+</head>
+
+<body>
+    
+    <link rel="stylesheet" href="login.css">
+    
+
+    <div class="flex items-center primary-bg justify-center h-screen w-screen">
+        <div class="bg-white flex flex-wrap	 rounded-lg shadow-md m-8 w-1/2 h-3/5 divide-x divide-gray-300">
+            <!-- Parte da esquerda -->
+            <div class="w-2/5 min-w-48	 p-6">
+                <h2 class="text-xl font-semibold mb-4">Login</h2>
+                <form>
+                    <div class="mb-4">
+                        <label for="username" class="block text-sm font-medium text-gray-700">Nome de usuário</label>
+                        <input type="text" id="username" name="username"
+                            class="mt-1 p-2 border rounded-md w-full primary-text">
+                    </div>
+                    <div class="mb-4">
+                        <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+                        <input type="password" id="password" name="password"
+                            class="mt-1 p-2 border rounded-md w-full primary-text">
+                    </div>
+                    <button type="submit"
+                        class="primary-bg text-white px-4 py-2 rounded-md hover:bg-blue-600">Entrar</button>
+                </form>
+            </div>
+            <!-- Parte da direita -->
+            <div class="w-3/5 teste">
+                <div id="login-illustration" style="border-radius: 0px 8px 8px 0px;" class="w-full h-full">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Importando bibliotecas JavaScript -->
+    <script src="/imports/lib/jquery.min.js"></script>
+    <script src="/imports/lib/sweetalert2.all.min.js"></script>
+    <script src="/imports/lib/rxjs.umd.min.js"></script>
+
+    <script src="login.js"></script>
+
+    <script>
+        
+    </script>
+
+
+</body>
+
+
+</html>

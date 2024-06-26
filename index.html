@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bora Maromba</title>
+</head>
+<body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var jwt = localStorage.getItem('jwt');
+      var username = localStorage.getItem('username');
+
+      if (jwt && username) {
+        // Decodifica o JWT para obter informações, se necessário
+        // Aqui é um exemplo básico, você deve implementar a decodificação correta do JWT
+        // Para verificar a validade e obter informações relevantes.
+
+        // Exibe o nome de usuário na página protegida
+        document.getElementById('loggedInUser').textContent = username;
+        // if cliente window.location.href = '/pages/cliente/home.html'; 
+
+      } else {
+        // Se não estiver logado, redireciona de volta para a página de login
+        window.location.href = '/pages/login/login.html';
+      }
+    });
+  </script>
+</body>
+</html>
