@@ -8,8 +8,21 @@
 <body>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      const { fromEvent, of } = rxjs;
+      const { map, catchError } = rxjs.operators;
+
       var jwt = localStorage.getItem('jwt');
       var username = localStorage.getItem('username');
+
+      const decodedToken = (token) => {
+        try{
+          return of (jwt_decode(token));
+        } catch (error) {
+          return of (null);
+        }
+      };
+
+
 
       if (jwt && username) {
         // Decodifica o JWT para obter informações, se necessário
@@ -17,8 +30,34 @@
         // Para verificar a validade e obter informações relevantes.
 
         // Exibe o nome de usuário na página protegida
-        document.getElementById('loggedInUser').textContent = username;
-        // if cliente window.location.href = '/pages/cliente/home.html'; 
+        decodeToken(jwt).pipe(
+          map(decodedToken => {
+            if (!decodedToken) {
+              throw new Error('Token inválido');
+            }
+
+            const currentTime = Math.floor(Date.now() / 1000);
+            if (decodedToken.exp && decodedToken.exp < currentTime) {
+              throw new Error('Token expirado');
+            }
+
+            return decodedToken;
+          }),
+            catchError(error => {
+              console.error('Erro:', error);
+              window.location.href = '/pages/login/login.html';
+              return of(null);
+            })
+        ).subscribe(decodedToken => {
+          if (decodedToken) {
+            document.getElementById('loggedInUser').textContent = username;
+            // if (decodedToken.role === 'cliente') {
+            //   window.location.href = '/pages/cliente/home.html';
+            // }
+          }
+        });
+          document.getElementById('loggedInUser').textContent = username;
+          // if cliente window.location.href = '/pages/cliente/home.html'; 
 
       } else {
         // Se não estiver logado, redireciona de volta para a página de login
