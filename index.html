@@ -23,7 +23,6 @@
       };
 
 
-
       if (jwt && username) {
         // Decodifica o JWT para obter informações, se necessário
         // Aqui é um exemplo básico, você deve implementar a decodificação correta do JWT
@@ -36,10 +35,10 @@
               throw new Error('Token inválido');
             }
 
-            const currentTime = Math.floor(Date.now() / 1000);
-            if (decodedToken.exp && decodedToken.exp < currentTime) {
-              throw new Error('Token expirado');
-            }
+            // const currentTime = Math.floor(Date.now() / 1000);
+            // if (decodedToken.exp && decodedToken.exp < currentTime) {
+            //   throw new Error('Token expirado');
+            // }
 
             return decodedToken;
           }),
@@ -51,13 +50,14 @@
         ).subscribe(decodedToken => {
           if (decodedToken) {
             document.getElementById('loggedInUser').textContent = username;
-            // if (decodedToken.role === 'cliente') {
-            //   window.location.href = '/pages/cliente/home.html';
-            // }
+            if (decodedToken.role === 'cliente') {
+              window.location.href = '/pages/cliente/home.html';
+            } else {
+              //redirecionamento para adm
+            }
           }
         });
           document.getElementById('loggedInUser').textContent = username;
-          // if cliente window.location.href = '/pages/cliente/home.html'; 
 
       } else {
         // Se não estiver logado, redireciona de volta para a página de login
