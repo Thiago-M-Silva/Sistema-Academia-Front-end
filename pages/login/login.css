@@ -2,16 +2,46 @@
     background-color: #0D0D0D;
 }
 
-
 .primary-text {
     color: #222366;
+}
+#shadow {
+    -webkit-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 2) calc((123px + 5vw) * 2) calc((55px + 2vw) * 2) rgba(0,0,0,0.9);
+    -moz-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 2) calc((123px + 5vw) * 2) calc((55px + 2vw) * 2) rgba(0,0,0,0.9);
+    box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 2) calc((123px + 5vw) * 2) calc((55px + 2vw) * 2.5) rgba(0,0,0,0.9);
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+#login-illustration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;    
+    z-index: -2; 
+}
+
+
+.login-panel {
+    background-color: #333333; /* Fundo cinza com baixa opacidade */
+    color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    max-width: 400px;
 }
 
 
 
-#login-illustration {
-    background-image: url("/assets/wallpaper.jpg");
-    background-size: cover;
-    background-position: right;
-    border-radius: 0px 5px 5px 0px;
+body{
+    overflow: hidden;
 }
