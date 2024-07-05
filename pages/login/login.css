@@ -9,6 +9,16 @@ code, pre {
 }
 
 
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-center{
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+}
 
 .op-8{
     opacity: 0.8;
@@ -19,6 +29,10 @@ code, pre {
 
 .w-100{
     width: 100%;
+}
+
+.w-90{
+    width: 90%;
 }
 
 .fw-600{
@@ -43,13 +57,22 @@ code, pre {
 }
 
 
+@media screen and (max-width: 767px) {
+    #shadow {
+        -webkit-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
+        -moz-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
+        box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
+    }
+}
+
+
 #logo-login{
     opacity: 0.94;
     filter: invert(100%);
 }
 
 #login-illustration {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -63,7 +86,7 @@ code, pre {
 .background{
     width: 430px;
     height: 520px;
-    position: absolute;
+    position: fixed;
     transform: translate(-50%,-50%);
     left: 50%;
     top: 50%;
@@ -81,7 +104,7 @@ code, pre {
         #621d3a
     );
     opacity: 0.6;
-    left: -140px;
+    left: -25%;
     top: -160px;
 }
 .shape:last-child{
@@ -92,13 +115,14 @@ code, pre {
         #62221D,
         #F2A649
     );
-    right: -140px;
+    right: -25%;
     bottom: -160px;
 }
 
 card{
-    height: 720px;
-    width: 500px;
+    max-height: 720px;
+    max-width: 500px;
+    min-width: 350px;
     background-color: rgba(0,0,0,0.2);
     position: absolute;
     transform: translate(-50%,-50%);
@@ -108,7 +132,7 @@ card{
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 35px;
+    padding: 50px 3%;
 }
 
 card *{
@@ -120,7 +144,6 @@ card *{
 
 label{
     display: block;
-    margin-top: 30px;
     font-size: 16px;
     font-weight: 600;
 }
@@ -128,13 +151,12 @@ label{
 input{
     display: block;
     height: 50px;
-    width: 100%;
+    width: 90%;
     background-color: rgba(255,255,255,0.07);
     border-radius: 5px;
     padding: 0 10px;
-    margin: 8px;
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 500;
 }
 ::placeholder{
     color: #e5e5e5;
@@ -142,11 +164,11 @@ input{
 
 .custom-btn-login{
     opacity: 0.9;
-    margin-top: 50px;
-    width: 100%;
+    width: 70%;
+    margin-top: 16px;
     background-color: #191919;
     color: white;
-    padding: 15px 0;
+    padding: 10px 0;
     font-size: 18px;
     font-weight: 600;
     border-radius: 5px;

@@ -29,18 +29,18 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <card class="animate__animated animate__fadeIn">
+    <card class="animate__animated animate__fadeIn flex-column flex-center">
         <h4 class="text-center"><b>Bora Maromba</b></h4>
         <img id="logo-login" class="w-100  invert" src="/assets/logo.png" />
+        <form class="w-100 flex-column flex-center">
+            <label class="w-90 text-left" for="username">Usuário</label>
+            <input type="text" placeholder="Login ou email" id="username">
 
-        <label for="username">Usuário</label>
-        <input type="text" placeholder="Login ou email" id="username">
+            <label class="w-90 text-left mt-2" for="password">Senha</label>
+            <input type="password" placeholder="Senha" id="password">
 
-        <label for="password">Senha</label>
-        <input type="password" placeholder="Senha" id="password">
-
+        </form>
         <button class="custom-btn-login">Entrar</button>
-
         <p class="text-center mt-2 op-9">Não tem uma conta? <a class="text-effect pointer"> Clique aqui</a> </p>
 
     </card>
@@ -57,10 +57,6 @@
     <script src="/imports/lib/rxjs.umd.min.js"></script>
 
     <script src="login.js"></script>
-
-    <script>
-
-    </script>
 
 
 </body>
