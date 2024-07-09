@@ -1,43 +1,36 @@
-$(document).ready(function() {
-    var username = window.document.getElementsById('username')
-    var password = window.document.getElementsById('password')
-    var url = 'http://localhost:8006/login'
+const ControllerLogin = {
+  url: 'http://localhost:8006/login',
 
-    // ainda não testado
-    document.addEventListener('DOMContentLoaded', function() {
-        const apiUrl = {url}; // Substitua pela URL da sua API
-        const requestData = { username: {username}, password: {password} }; 
-    
-        httpPost(apiUrl, requestData).subscribe(data => {
-          if (data) {
-            console.log('Dados recebidos:', data);
-          } else {
-            console.log('Falha ao receber dados');
-          }
+  init: function() {
+    $(document).ready(() => {
+      $('#login-form').on('submit', (event) => {
+        event.preventDefault();
+  
+        const username = $('#username').val();
+        const password = $('#password').val();
+  
+        const apiUrl = ControllerLogin.url;
+        const requestData = { username: username, password: password };
+  
+        ControllerLogin.httpPost(apiUrl, requestData).done((data) => {
+          console.log('Dados recebidos:', data);
+          // Aqui você pode lidar com a resposta da API
+        }).fail((error) => {
+          console.error('Erro na requisição: ', error);
+          // Aqui você pode lidar com o erro da requisição
         });
       });
+    });
+  },
 
-    // passar isso aqui para outro lugar 
-    const {from, of} = rxjs;
-    const {switchMap, catchError} = rxjs.operators;
+  httpPost: function(url, body) {
+    return $.ajax({
+      url: url,
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(body)
+    });
+  },
 
-    function httpPost(url, body, headers = { 'Content-Type': 'application/json'}){
-        return from(fetch(url, {
-            method: 'POST',
-            headers: headers,
-            body: JSON.stringify(body)
-        })).pipe(
-            switchMap(response => {
-                if(!response.ok){
-                    throw new Error('Erro de rede!');
-                }
-                return response.json();
-            }),
-            catchError(error => {
-                console.error('Erro na requisição: ', error);
-                return of(null) //retorno de um observable null em caso de erro
-            })
-        )
-    }
 
-});
+};
