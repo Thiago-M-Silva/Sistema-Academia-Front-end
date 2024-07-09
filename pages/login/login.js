@@ -33,4 +33,8 @@ const ControllerLogin = {
   },
 
 
+  start (){
+    console.log("Hello world");
+  }
+
 };
