@@ -8,6 +8,17 @@ code, pre {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
+.flex-cadastro{
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+}
 
 .flex-column{
     display: flex;
@@ -18,6 +29,15 @@ code, pre {
     justify-content: center;
     justify-items: center;
     align-items: center;
+}
+
+.flex-item {
+    min-width: calc((33% - 20px)); /* Define o tamanho máximo do item com base no cálculo acima */
+    max-width: calc((100% - 20px) / 2); /* Define o tamanho máximo do item com base no cálculo acima */
+}
+
+.flex-span{
+    flex: 1;
 }
 
 .op-8{
@@ -44,6 +64,12 @@ code, pre {
     cursor: pointer;
 }
 
+.card-expanded {
+    max-height: 90vh !important;
+    max-width: 80vw !important;
+    transition: width 1s ease, height 1s ease; /* Adiciona uma transição suave */
+}
+
 #shadow {
     -webkit-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 2) calc((123px + 5vw) * 2) calc((55px + 2vw) * 2) rgba(0, 0, 0, 0.9);
     -moz-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 2) calc((123px + 5vw) * 2) calc((55px + 2vw) * 2) rgba(0, 0, 0, 0.9);
@@ -54,15 +80,6 @@ code, pre {
     left: 0;
     width: 100%;
     height: 100%;
-}
-
-
-@media screen and (max-width: 767px) {
-    #shadow {
-        -webkit-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
-        -moz-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
-        box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
-    }
 }
 
 
@@ -119,7 +136,7 @@ code, pre {
     bottom: -160px;
 }
 
-card{
+#login-card{
     max-height: 720px;
     max-width: 500px;
     min-width: 350px;
@@ -132,23 +149,26 @@ card{
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 50px 3%;
+    padding: 1% 3%;
+    transition: max-height 1s ease, max-width 1s ease; /* Transição suave */
+    overflow: hidden; /* Prevenir conteúdo "saltando" */
 }
 
-card *{
+#login-card *{
     color: #f2f2f2;
     letter-spacing: 0.5px;
     outline: none;
     border: none;
 }
 
-label{
+#login-card label{
     display: block;
     font-size: 16px;
     font-weight: 600;
 }
 
-input{
+#login-card input,
+#login-card select{
     display: block;
     height: 50px;
     width: 90%;
@@ -173,6 +193,7 @@ input{
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
+
 }
 
 .custom-btn-login:hover{
@@ -186,6 +207,22 @@ input{
 }
 
 
+
 body {
     overflow: hidden;
+}
+
+
+@media screen and (max-width: 767px) {
+    #shadow {
+        -webkit-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
+        -moz-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
+        box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
+    }
+
+    .card-expanded {
+        max-height: 100vh !important;
+        max-width: 100vw !important;
+        transition: width 1s ease, height 1s ease; /* Adiciona uma transição suave */
+    }
 }

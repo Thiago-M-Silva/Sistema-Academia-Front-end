@@ -1,3 +1,5 @@
+// const { listenerCount } = require("process");
+
 const ControllerLogin = {
   url: 'http://localhost:8006/login',
 
@@ -33,8 +35,33 @@ const ControllerLogin = {
   },
 
 
+  listenerCadastro: function() {
+    $("#login").off("click");
+    $("#login").on("click", function(event) {
+        $('#login-card').removeClass('card-expanded');
+        $('#signup').fadeOut(1000);
+        $('.shape').fadeIn(1000);
+        $('#signin').fadeIn(1000);
+        ControllerLogin.listenerLogin();
+
+    });
+  },
+
+  listenerLogin: function() {
+    $("#cadastrar").off("click");
+    $("#cadastrar").on("click", function(event) {
+        $('#login-card').addClass('card-expanded');
+        $('#signin').fadeOut(1000);
+        $('.shape').fadeOut(1000);
+        $('#signup').fadeIn(1000);
+        ControllerLogin.listenerCadastro();
+
+    });
+  },
+
+
   start (){
-    console.log("Hello world");
+    ControllerLogin.listenerLogin();
   }
 
 };
