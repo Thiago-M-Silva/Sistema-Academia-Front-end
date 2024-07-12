@@ -1,20 +1,24 @@
 // const { listenerCount } = require("process");
+import { httpReq } from "../../services/httpReq";
+
 
 const ControllerLogin = {
-  url: 'http://localhost:8006/login',
+  //url: 'http://localhost:8006/login',
+  parametro: 'login',
+  parametro2: 'registrar',
 
   init: function() {
     $(document).ready(() => {
-      $('#login-form').on('submit', (event) => {
+      $('#signin').on('submit', (event) => {
         event.preventDefault();
   
         const username = $('#username').val();
         const password = $('#password').val();
   
-        const apiUrl = ControllerLogin.url;
+        //const apiUrl = ControllerLogin.url;
         const requestData = { username: username, password: password };
   
-        ControllerLogin.httpPost(apiUrl, requestData).done((data) => {
+        httpReq.httpPost(apiUrl, parametro, requestData).done((data) => {
           console.log('Dados recebidos:', data);
           // Aqui você pode lidar com a resposta da API
         }).fail((error) => {
@@ -25,14 +29,38 @@ const ControllerLogin = {
     });
   },
 
-  httpPost: function(url, body) {
-    return $.ajax({
-      url: url,
-      type: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify(body)
+  init: function() {
+    $(document).ready(() => {
+      $('#signup').on('submit', (event) => {
+        event.preventDefault();
+  
+        const name = $('#firstname').val();
+        const username = $('#username').val();
+        const password = $('#password').val();
+        const plan = $('#plan').val();
+  
+        //const apiUrl = ControllerLogin.url;
+        const requestData = { name: name, username: username, password: password, plan: plan };
+  
+        httpReq.httpPost(apiUrl, parametro2, requestData).done((data) => {
+          console.log('Dados recebidos:', data);
+          // Aqui você pode lidar com a resposta da API
+        }).fail((error) => {
+          console.error('Erro na requisição: ', error);
+          // Aqui você pode lidar com o erro da requisição
+        });
+      });
     });
   },
+
+  // httpPost: function(url, body) {
+  //   return $.ajax({
+  //     url: url,
+  //     type: 'POST',
+  //     contentType: 'application/json',
+  //     data: JSON.stringify(body)
+  //   });
+  // },
 
 
   listenerCadastro: function() {
