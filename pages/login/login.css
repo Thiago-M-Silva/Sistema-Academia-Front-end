@@ -234,5 +234,9 @@ body {
         max-height: 100vh !important;
         max-width: 100vw !important;
         transition: width 1s ease, height 1s ease; /* Adiciona uma transição suave */
+    }  
+    
+    #login-card {
+        padding: 16px 3%;
     }
 }
