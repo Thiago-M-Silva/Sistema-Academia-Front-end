@@ -1,5 +1,5 @@
 const httpReq = {
-  url: 'http://localhost:8006/api/',
+  url: 'http://195.200.5.149:8006/api/',
 
   httpPost: function(endpoint, body) {
       let url = this.url + endpoint;

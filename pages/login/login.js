@@ -14,10 +14,10 @@ const ControllerLogin = {
 
   handleSignIn: function (event) {
     event.preventDefault();
-    const username = $("#username").val();
+    const email = $("#username").val();
     const password = $("#password").val();
     const requestData = {
-      username,
+      email,
       password
     };
 
@@ -26,15 +26,21 @@ const ControllerLogin = {
 
   handleSignUp: function (event) {
     event.preventDefault();
-    const name = $("#firstname").val();
-    const username = $("#username").val();
-    const password = $("#password").val();
-    const plan = $("#plan").val();
+    const name = $("#firstname").val() + $("#lastname").val();
+    const email = $("#email").val();
+    const password = $("#password_registro").val();
+    const idade = $("#age").val();
+    const peso = $("#weight").val();
+    const altura = $("#height").val();
+    const plano = $("#plan").val();
     const requestData = {
       name,
-      username,
+      email,
       password,
-      plan
+      idade,
+      peso,
+      altura,
+      plano
     };
 
     this.sendRequest("registrar", requestData);
