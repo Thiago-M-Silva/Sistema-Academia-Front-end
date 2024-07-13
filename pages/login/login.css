@@ -4,11 +4,12 @@ body {
 }
 
 /* Fonte para código ou terminal */
-code, pre {
+code,
+pre {
     font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
-.flex-cadastro{
+.flex-cadastro {
     flex: 1;
     width: 100%;
     display: flex;
@@ -20,45 +21,47 @@ code, pre {
     align-items: center;
 }
 
-.flex-column{
+.flex-column {
     display: flex;
     flex-direction: column;
 }
 
-.flex-center{
+.flex-center {
     justify-content: center;
     justify-items: center;
     align-items: center;
 }
 
 .flex-item {
-    min-width: calc((33% - 20px)); /* Define o tamanho máximo do item com base no cálculo acima */
-    max-width: calc((100% - 20px) / 2); /* Define o tamanho máximo do item com base no cálculo acima */
+    min-width: calc((33% - 20px));
+    /* Define o tamanho máximo do item com base no cálculo acima */
+    max-width: calc((100% - 20px) / 2);
+    /* Define o tamanho máximo do item com base no cálculo acima */
 }
 
-.flex-span{
+.flex-span {
     flex: 1;
 }
 
-.op-8{
-    opacity: 0.8;
-}
-.op-9{
+.op-8 {
     opacity: 0.8;
 }
 
-.w-100{
+.op-9 {
+    opacity: 0.8;
+}
+
+.w-100 {
     width: 100%;
 }
 
-.w-90{
+.w-90 {
     width: 90%;
 }
 
-.fw-600{
+.fw-600 {
     font-weight: 600;
 }
-
 
 .pointer {
     cursor: pointer;
@@ -67,7 +70,8 @@ code, pre {
 .card-expanded {
     max-height: 90vh !important;
     max-width: 80vw !important;
-    transition: width 1s ease, height 1s ease; /* Adiciona uma transição suave */
+    transition: width 1s ease, height 1s ease;
+    /* Adiciona uma transição suave */
 }
 
 #shadow {
@@ -83,7 +87,7 @@ code, pre {
 }
 
 
-#logo-login{
+#logo-login {
     opacity: 0.94;
     filter: invert(100%);
 }
@@ -100,85 +104,85 @@ code, pre {
 }
 
 
-.background{
+.background {
     width: 430px;
     height: 520px;
     position: fixed;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     left: 50%;
     top: 50%;
 }
 
-.background .shape{
+.background .shape {
     height: 200px;
     width: 200px;
     position: absolute;
     border-radius: 50%;
 }
-.shape:first-child{
-    background: linear-gradient(
-        #f25249,
-        #621d3a
-    );
+
+.shape:first-child {
+    background: linear-gradient(#f25249,
+            #621d3a);
     opacity: 0.6;
     left: -25%;
     top: -160px;
 }
-.shape:last-child{
+
+.shape:last-child {
     opacity: 0.6;
 
-    background: linear-gradient(
-        to right,
-        #62221D,
-        #F2A649
-    );
+    background: linear-gradient(to right,
+            #62221D,
+            #F2A649);
     right: -25%;
     bottom: -160px;
 }
 
-#login-card{
+#login-card {
     max-height: 720px;
     max-width: 500px;
     min-width: 350px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     position: absolute;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     top: 50%;
     left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
-    border: 2px solid rgba(255,255,255,0.1);
-    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 2% 3%;
-    transition: max-height 1s ease, max-width 1s ease; /* Transição suave */
-    overflow: hidden; /* Prevenir conteúdo "saltando" */
+    transition: max-height 1s ease, max-width 1s ease;
+    /* Transição suave */
+    overflow: hidden;
+    /* Prevenir conteúdo "saltando" */
 }
 
-#login-card *{
+#login-card * {
     color: #f2f2f2;
     letter-spacing: 0.5px;
     outline: none;
     border: none;
 }
 
-#login-card label{
+#login-card label {
     display: block;
     font-size: 16px;
     font-weight: 600;
 }
 
 #login-card input,
-#login-card select{
+#login-card select {
     display: block;
     height: 50px;
     width: 90%;
-    background-color: rgba(255,255,255,0.07);
+    background-color: rgba(255, 255, 255, 0.07);
     border-radius: 5px;
     padding: 0 10px;
     font-size: 14px;
     font-weight: 500;
 
-    option{
+    option {
         height: 50px;
         background-color: #3f3f3f;
         opacity: 0.07 !important;
@@ -186,13 +190,12 @@ code, pre {
         font-weight: 600;
     }
 }
-::placeholder{
+
+::placeholder {
     color: #e5e5e5;
 }
 
-
-
-.custom-btn-login{
+.custom-btn-login {
     opacity: 0.9;
     width: 70%;
     margin-top: 16px;
@@ -206,12 +209,12 @@ code, pre {
 
 }
 
-.custom-btn-login:hover{
+.custom-btn-login:hover {
     opacity: 1;
     transform: scale(1.02);
 }
 
-.text-effect:hover{
+.text-effect:hover {
     color: white;
     font-weight: 900;
 }
@@ -233,10 +236,11 @@ body {
     .card-expanded {
         max-height: 100vh !important;
         max-width: 100vw !important;
-        transition: width 1s ease, height 1s ease; /* Adiciona uma transição suave */
-    }  
-    
+        transition: width 1s ease, height 1s ease;
+        /* Adiciona uma transição suave */
+    }
+
     #login-card {
-        padding: 16px 3%;
+        padding: 20px 3%;
     }
 }
