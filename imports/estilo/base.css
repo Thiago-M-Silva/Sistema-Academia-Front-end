@@ -24,10 +24,6 @@ body {
     color: white !important; /* Texto branco para contraste */
 }
 
-.swal2-icon {
-    filter: invert(1); /* Inverte cores do ícone para contraste */
-}
-
 .swal2-confirm,
 .swal2-cancel {
     color: #f2f2f2 !important; /* Cor dos botões */
@@ -35,7 +31,7 @@ body {
 }
 
 .swal2-cancel {
-    background-color: #d33 !important; /* Cor de fundo do botão de cancelar */
+    background-color: #4c1f1f !important; /* Cor de fundo do botão de cancelar */
 }
 
 .swal2-popup.swal2-toast {
@@ -43,12 +39,6 @@ body {
     backdrop-filter: blur(10px); /* Efeito de blur forte */
     -webkit-backdrop-filter: blur(10px); /* Para navegadores WebKit */
 }
-
-.swal2-toast.swal2-icon {
-    filter: invert(1); /* Inverte cores do ícone para contraste */
-}
-
-
 
 /* CSS uteis em todo o projeto */
 
