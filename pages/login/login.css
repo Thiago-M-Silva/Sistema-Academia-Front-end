@@ -149,7 +149,7 @@ code, pre {
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.1);
     box-shadow: 0 0 40px rgba(8,7,16,0.6);
-    padding: 1% 3%;
+    padding: 2% 3%;
     transition: max-height 1s ease, max-width 1s ease; /* Transição suave */
     overflow: hidden; /* Prevenir conteúdo "saltando" */
 }
