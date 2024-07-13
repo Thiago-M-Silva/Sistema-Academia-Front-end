@@ -8,6 +8,7 @@ const ControllerLogin = {
   setupEventHandlers: function () {
     $("#signin").on("submit", this.handleSignIn.bind(this));
     $("#signup").on("submit", this.handleSignUp.bind(this));
+    this.setupPasswordToggle();
     this.listenerLogin();
   },
 
@@ -52,6 +53,21 @@ const ControllerLogin = {
       });
   },
 
+  setupPasswordToggle: function () {
+    $(document).on("click", ".btn-toggle-password", function () {
+      const targetId = $(this).data("target");
+      const $passwordField = $("#" + targetId);
+
+      if ($passwordField.attr("type") === "password") {
+        $passwordField.attr("type", "text");
+        $(this).text("Esconder Senha");
+      } else {
+        $passwordField.attr("type", "password");
+        $(this).text("Mostrar Senha");
+      }
+    });
+  },
+
   listenerCadastro: function () {
     $("#login")
       .off("click")
@@ -82,6 +98,8 @@ const ControllerLogin = {
         ]);
         this.listenerCadastro();
       });
+
+      
   },
 };
 

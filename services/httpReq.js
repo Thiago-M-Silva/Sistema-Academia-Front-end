@@ -1,27 +1,124 @@
 const httpReq = {
-    url: 'http://localhost:8006/api/',
+  url: 'http://localhost:8006/api/',
 
-    httpPost: function( parametro, body) {
-        //garante que paramStr sera string
-        let paramStr = parametro ? `${parametro}` : '';
-        return $.ajax({
-          url: httpReq.url + paramStr,
+  httpPost: function(endpoint, body) {
+      let url = this.url + endpoint;
+      return $.ajax({
+          url: url,
           type: 'POST',
           contentType: 'application/json',
           data: JSON.stringify(body)
-        });
-      },
+      }).fail(function(xhr, status, error) {
+          let errorMessage = "Ocorreu um erro na requisição.";
+          if (xhr.responseJSON && xhr.responseJSON.message) {
+              errorMessage = xhr.responseJSON.message;
+          } else if (xhr.statusText) {
+              errorMessage = xhr.statusText;
+          }
+          // Exibir o erro usando SweetAlert com estilo customizado
+          Swal.fire({
+              icon: 'error',
+              title: 'Erro',
+              text: errorMessage,
+              customClass: {
+                  popup: 'swal2-popup-custom',
+                  icon: 'swal2-icon-custom',
+                  confirmButton: 'swal2-confirm',
+                  cancelButton: 'swal2-cancel'
+              },
+              background: '#000', // Cor de fundo do modal
+              backdrop: 'rgba(0, 0, 0, 0.4)' // Opacidade baixa
+          });
+      });
+  },
 
-    httpGet: function( parametro, headers = {}){
-        let paramStr = parametro ? `${parametro}` : '';
-        return $.ajax({
-            url: httpReq.url + paramStr,
-            type: 'GET',
-            headers: headers
-        });
-    },
+  httpGet: function(endpoint, headers = {}) {
+      let url = this.url + endpoint;
+      return $.ajax({
+          url: url,
+          type: 'GET',
+          headers: headers
+      }).fail(function(xhr, status, error) {
+          let errorMessage = "Ocorreu um erro na requisição.";
+          if (xhr.responseJSON && xhr.responseJSON.message) {
+              errorMessage = xhr.responseJSON.message;
+          } else if (xhr.statusText) {
+              errorMessage = xhr.statusText;
+          }
+          // Exibir o erro usando SweetAlert com estilo customizado
+          Swal.fire({
+              icon: 'error',
+              title: 'Erro',
+              text: errorMessage,
+              customClass: {
+                  popup: 'swal2-popup-custom',
+                  icon: 'swal2-icon-custom',
+                  confirmButton: 'swal2-confirm',
+                  cancelButton: 'swal2-cancel'
+              },
+              background: '#000', // Cor de fundo do modal
+              backdrop: 'rgba(0, 0, 0, 0.4)' // Opacidade baixa
+          });
+      });
+  },
 
-    httpPut: function(){},
+  httpPut: function(endpoint, body) {
+      let url = this.url + endpoint;
+      return $.ajax({
+          url: url,
+          type: 'PUT',
+          contentType: 'application/json',
+          data: JSON.stringify(body)
+      }).fail(function(xhr, status, error) {
+          let errorMessage = "Ocorreu um erro na requisição.";
+          if (xhr.responseJSON && xhr.responseJSON.message) {
+              errorMessage = xhr.responseJSON.message;
+          } else if (xhr.statusText) {
+              errorMessage = xhr.statusText;
+          }
+          // Exibir o erro usando SweetAlert com estilo customizado
+          Swal.fire({
+              icon: 'error',
+              title: 'Erro',
+              text: errorMessage,
+              customClass: {
+                  popup: 'swal2-popup-custom',
+                  icon: 'swal2-icon-custom',
+                  confirmButton: 'swal2-confirm',
+                  cancelButton: 'swal2-cancel'
+              },
+              background: '#000', // Cor de fundo do modal
+              backdrop: 'rgba(0, 0, 0, 0.4)' // Opacidade baixa
+          });
+      });
+  },
 
-    httpDelete: function(){}
-}
+  httpDelete: function(endpoint) {
+      let url = this.url + endpoint;
+      return $.ajax({
+          url: url,
+          type: 'DELETE'
+      }).fail(function(xhr, status, error) {
+          let errorMessage = "Ocorreu um erro na requisição.";
+          if (xhr.responseJSON && xhr.responseJSON.message) {
+              errorMessage = xhr.responseJSON.message;
+          } else if (xhr.statusText) {
+              errorMessage = xhr.statusText;
+          }
+          // Exibir o erro usando SweetAlert com estilo customizado
+          Swal.fire({
+              icon: 'error',
+              title: 'Erro',
+              text: errorMessage,
+              customClass: {
+                  popup: 'swal2-popup-custom',
+                  icon: 'swal2-icon-custom',
+                  confirmButton: 'swal2-confirm',
+                  cancelButton: 'swal2-cancel'
+              },
+              background: '#000', // Cor de fundo do modal
+              backdrop: 'rgba(0, 0, 0, 0.4)' // Opacidade baixa
+          });
+      });
+  }
+};
