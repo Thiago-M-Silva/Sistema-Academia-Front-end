@@ -177,10 +177,20 @@ code, pre {
     padding: 0 10px;
     font-size: 14px;
     font-weight: 500;
+
+    option{
+        height: 50px;
+        background-color: #3f3f3f;
+        opacity: 0.07 !important;
+        font-size: 15px;
+        font-weight: 600;
+    }
 }
 ::placeholder{
     color: #e5e5e5;
 }
+
+
 
 .custom-btn-login{
     opacity: 0.9;
