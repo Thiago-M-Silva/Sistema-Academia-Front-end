@@ -35,7 +35,7 @@
                     <input type="password" placeholder="Senha" id="password">
                 </form>
                 <button class="custom-btn-login">Entrar</button>
-                <p class="text-center mt-2 op-9">Não tem uma conta? <a id="cadastrar" class="text-effect pointer"> Clique aqui</a> </p>
+                <p class="text-center mt-2 op-9">Não tem uma conta? <span id="cadastrar" class="text-effect pointer"> Clique aqui</span> </p>
             </div>
         </div>
         <div id="signup" style="display: none !important">
@@ -101,7 +101,7 @@
                         <button type="submit" class="custom-btn-login">Registrar</button>
                     </div>
                 </form>
-                <p class="text-center mt-2 op-9">Já possui uma conta? <a id="login" class="text-effect pointer"> Clique aqui</a> </p>
+                <p class="text-center mt-2 op-9">Já possui uma conta? <span id="login" class="text-effect pointer"> Clique aqui</span> </p>
         </div>
 
     </div>
@@ -117,9 +117,7 @@
 
 
     <script>
-        $(document).ready(function () {
-            ControllerLogin.start();
-        });
+        document.addEventListener('DOMContentLoaded', function() {ControllerLogin.start(); });
     </script>
 
 </body>

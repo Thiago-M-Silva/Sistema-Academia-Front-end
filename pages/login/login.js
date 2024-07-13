@@ -1,5 +1,5 @@
 // const { listenerCount } = require("process");
-import { httpReq } from "../../services/httpReq";
+// import { httpReq } from "../../services/httpReq";
 
 
 const ControllerLogin = {
@@ -7,17 +7,17 @@ const ControllerLogin = {
   parametro: 'login',
   parametro2: 'registrar',
 
-  init: function() {
+  init: function () {
     $(document).ready(() => {
       $('#signin').on('submit', (event) => {
         event.preventDefault();
-  
+
         const username = $('#username').val();
         const password = $('#password').val();
-  
+
         //const apiUrl = ControllerLogin.url;
         const requestData = { username: username, password: password };
-  
+
         httpReq.httpPost(apiUrl, parametro, requestData).done((data) => {
           console.log('Dados recebidos:', data);
           // Aqui você pode lidar com a resposta da API
@@ -29,19 +29,19 @@ const ControllerLogin = {
     });
   },
 
-  init: function() {
+  init: function () {
     $(document).ready(() => {
       $('#signup').on('submit', (event) => {
         event.preventDefault();
-  
+
         const name = $('#firstname').val();
         const username = $('#username').val();
         const password = $('#password').val();
         const plan = $('#plan').val();
-  
+
         //const apiUrl = ControllerLogin.url;
         const requestData = { name: name, username: username, password: password, plan: plan };
-  
+
         httpReq.httpPost(apiUrl, parametro2, requestData).done((data) => {
           console.log('Dados recebidos:', data);
           // Aqui você pode lidar com a resposta da API
@@ -63,32 +63,44 @@ const ControllerLogin = {
   // },
 
 
-  listenerCadastro: function() {
+  // Função para configurar o listener de cadastro
+  listenerCadastro: function () {
     $("#login").off("click");
-    $("#login").on("click", function(event) {
-        $('#login-card').removeClass('card-expanded');
-        $('#signup').fadeOut(1000);
-        $('.shape').fadeIn(1000);
-        $('#signin').fadeIn(1000);
-        ControllerLogin.listenerLogin();
+    $("#login").on("click", async function (event) {
+      // Garantir que as animações sejam executadas em paralelo usando Promise.all
+      await Promise.all([
+        $('#login-card').removeClass('card-expanded').promise(),
 
+        $('#signup').fadeOut(500).promise(),
+      ]);
+      $('.shape').fadeIn(1000).promise(),
+      $('#signin').fadeIn(1000).promise()
+      // Ajustar o layout do card
+      // Chamar o listener de login
+      ControllerLogin.listenerLogin();
     });
   },
 
-  listenerLogin: function() {
+  // Função para configurar o listener de login
+  listenerLogin: function () {
     $("#cadastrar").off("click");
-    $("#cadastrar").on("click", function(event) {
-        $('#login-card').addClass('card-expanded');
-        $('#signin').fadeOut(1000);
-        $('.shape').fadeOut(1000);
-        $('#signup').fadeIn(1000);
-        ControllerLogin.listenerCadastro();
-
+    $("#cadastrar").on("click", async function (event) {
+      // Garantir que as animações sejam executadas em paralelo usando Promise.all
+      await Promise.all([
+        $('#signin').fadeOut(500).promise(),
+        $('.shape').fadeOut(500).promise(),
+      ]);
+      $('#signup').fadeIn(1000).promise()
+      $('#login-card').addClass('card-expanded');
+      // Ajustar o layout do card
+      // Chamar o listener de cadastro
+      ControllerLogin.listenerCadastro();
     });
   },
 
 
-  start (){
+
+  start() {
     ControllerLogin.listenerLogin();
   }
 
