@@ -5,12 +5,13 @@ const ControllerLogin = {
     });
   },
 
-  setupEventHandlers: function () {
+  setupEventHandlers: async function () {
     $("#signin").on("submit", this.handleSignIn.bind(this));
     $("#signup").on("submit", this.handleSignUp.bind(this));
     this.setupPasswordToggle();
     this.listenerLogin();
-  },
+    },
+  
 
   handleSignIn: function (event) {
     event.preventDefault();
@@ -71,6 +72,21 @@ const ControllerLogin = {
         $passwordField.attr("type", "password");
         $(this).text("Mostrar Senha");
       }
+    });
+  },
+
+
+  async sucesso(){
+    // Utilize o método de promessas do jQuery corretamente
+    await Promise.all([
+      $("#login-card").find("*").fadeOut(500).promise(),
+      $("#login-card").append("<span class='text-center white' style='font-size: 48px' >&#x2713</span>").hide().fadeIn(500),
+      $(".shape").fadeOut(500).promise()
+    ]);
+
+    // Após o término das animações, aplique o CSS com a animação desejada
+    $("#login-card").css({
+      "animation": "transicaoSaida 2s forwards"
     });
   },
 

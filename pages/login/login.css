@@ -99,6 +99,7 @@
     transition: max-height 1s ease, max-width 1s ease;
     /* Transição suave */
     overflow: hidden;
+    z-index: 100;
     /* Prevenir conteúdo "saltando" */
 }
 
@@ -188,3 +189,5 @@ body {
         padding: 20px 3%;
     }
 }
+
+
