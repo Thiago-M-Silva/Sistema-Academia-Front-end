@@ -4,67 +4,18 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bora Maromba</title>
-</head>
-<body>
-  <script src="imports/lib/rxjs.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/rxjs@6.6.7/bundles/rxjs.umd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
-  <script>
+  <script type="module" src="authUtils.js"></script>
+  <script type="module" src="httpReq.js"></script>
+</head>
+<body>
+  <div id="loggedInUser"></div>
+  <script type="module">
+    import { checkAuthenticationAndRedirect } from './services/authUtils.js';
+
     document.addEventListener('DOMContentLoaded', function() {
-      const { of } = rxjs;
-      const { map, catchError } = rxjs.operators;
-
-      var jwt = localStorage.getItem('jwt');
-      var username = localStorage.getItem('username');
-
-      const decodeToken = (token) => {
-        try {
-          return of(jwt_decode(token));
-        } catch (error) {
-          return of(null);
-        }
-      };
-
-      if (jwt && username) {
-      // Decodifica o JWT para obter informações, se necessário
-      // Aqui é um exemplo básico, você deve implementar a decodificação correta do JWT
-      // Para verificar a validade e obter informações relevantes.
-      // Exibe o nome de usuário na página protegida
-
-        decodeToken(jwt).pipe(
-          map(decodedToken => {
-            if (!decodedToken) {
-              throw new Error('Token inválido');
-            }
-
-            const currentTime = Math.floor(Date.now() / 1000);
-            if (decodedToken.exp && decodedToken.exp < currentTime) {
-              throw new Error('Token expirado');
-            }
-
-            return decodedToken;
-          }),
-          catchError(error => {
-            console.error('Erro:', error);
-            window.location.href = '/pages/login/login.html';
-            return of(null);
-          })
-        ).subscribe(decodedToken => {
-          if (decodedToken) {
-            document.getElementById('loggedInUser').textContent = username;
-            if (decodedToken.role === 'cliente') {
-              window.location.href = '/pages/cliente/home.html';
-            } else if (decodedToken.role === 'admin') {
-              window.location.href = '/pages/admin/home.html';
-            } else {
-              window.location.href = '/pages/login/login.html';
-            }
-          }
-        });
-      } else {
-        // Se não estiver logado, redireciona de volta para a página de login
-        window.location.href = '/pages/login/login.html';
-      }
+      checkAuthenticationAndRedirect();
     });
   </script>
 </body>

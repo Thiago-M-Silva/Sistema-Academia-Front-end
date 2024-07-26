@@ -1,3 +1,5 @@
+import { httpReq } from '../../services/httpReq.js'; //so importei aq
+
 const ControllerLogin = {
   init: function () {
     $(document).ready(() => {
