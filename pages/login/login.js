@@ -27,7 +27,7 @@ class ControllerLogin {
 
   handleSignUp(event) {
     event.preventDefault();
-    const name = $("#firstname").val() + $("#lastname").val();
+    const name = $("#firstname").val() +" "+ $("#lastname").val();
     const email = $("#email").val();
     const password = $("#password_registro").val();
     const idade = $("#age").val();
