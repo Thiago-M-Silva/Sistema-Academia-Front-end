@@ -1,33 +1,31 @@
-import { httpReq } from '../../services/httpReq.js'; //so importei aq
+import { HttpReq } from "../../services/httpReq.js";
 
-const ControllerLogin = {
-  init: function () {
+class ControllerLogin {
+  httpReq = new HttpReq();
+
+  constructor() {
     $(document).ready(() => {
       this.setupEventHandlers();
     });
-  },
+  }
 
-  setupEventHandlers: async function () {
+  setupEventHandlers() {
     $("#signin").on("submit", this.handleSignIn.bind(this));
     $("#signup").on("submit", this.handleSignUp.bind(this));
     this.setupPasswordToggle();
     this.listenerLogin();
-    },
-  
+  }
 
-  handleSignIn: function (event) {
+  handleSignIn(event) {
     event.preventDefault();
     const email = $("#username").val();
     const password = $("#password").val();
-    const requestData = {
-      email,
-      password
-    };
+    const requestData = { email, password };
 
     this.sendRequest("login", requestData);
-  },
+  }
 
-  handleSignUp: function (event) {
+  handleSignUp(event) {
     event.preventDefault();
     const name = $("#firstname").val() + $("#lastname").val();
     const email = $("#email").val();
@@ -36,21 +34,13 @@ const ControllerLogin = {
     const peso = $("#weight").val();
     const altura = $("#height").val();
     const plano = $("#plan").val();
-    const requestData = {
-      name,
-      email,
-      password,
-      idade,
-      peso,
-      altura,
-      plano
-    };
+    const requestData = { name, email, password, idade, peso, altura, plano };
 
     this.sendRequest("registrar", requestData);
-  },
+  }
 
-  sendRequest: function (endpoint, data) {
-    httpReq
+  sendRequest(endpoint, data) {
+    this.httpReq
       .httpPost(endpoint, data)
       .done((response) => {
         console.log("Dados recebidos:", response);
@@ -60,9 +50,9 @@ const ControllerLogin = {
         console.error("Erro na requisição:", error);
         // Aqui você pode lidar com o erro da requisição
       });
-  },
+  }
 
-  setupPasswordToggle: function () {
+  setupPasswordToggle() {
     $(document).on("click", ".btn-toggle-password", function () {
       const targetId = $(this).data("target");
       const $passwordField = $("#" + targetId);
@@ -75,10 +65,9 @@ const ControllerLogin = {
         $(this).text("Mostrar Senha");
       }
     });
-  },
+  }
 
-
-  async sucesso(){
+  async sucesso() {
     // Utilize o método de promessas do jQuery corretamente
     await Promise.all([
       $("#login-card").find("*").fadeOut(500).promise(),
@@ -90,9 +79,9 @@ const ControllerLogin = {
     $("#login-card").css({
       "animation": "transicaoSaida 2s forwards"
     });
-  },
+  }
 
-  listenerCadastro: function () {
+  listenerCadastro() {
     $("#login")
       .off("click")
       .on("click", async () => {
@@ -106,9 +95,9 @@ const ControllerLogin = {
         ]);
         this.listenerLogin();
       });
-  },
+  }
 
-  listenerLogin: function () {
+  listenerLogin() {
     $("#cadastrar")
       .off("click")
       .on("click", async () => {
@@ -122,9 +111,7 @@ const ControllerLogin = {
         ]);
         this.listenerCadastro();
       });
+  }
+}
 
-      
-  },
-};
-
-ControllerLogin.init();
+const controllerLogin = new ControllerLogin();

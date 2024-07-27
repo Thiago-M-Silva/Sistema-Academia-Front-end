@@ -4,18 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bora Maromba</title>
-  <script src="https://cdn.jsdelivr.net/npm/rxjs@6.6.7/bundles/rxjs.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
-  <script type="module" src="authUtils.js"></script>
-  <script type="module" src="httpReq.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script type="module" src="/services/httpReq.js"></script>
+  <script type="module" src="/services/authUtils.js"></script>
+  <script type="module" src="login.js"></script>
 </head>
 <body>
   <div id="loggedInUser"></div>
   <script type="module">
-    import { checkAuthenticationAndRedirect } from './services/authUtils.js';
+    import { CheckAuthenticationAndRedirect } from "./services/authUtils.js";
 
     document.addEventListener('DOMContentLoaded', function() {
-      checkAuthenticationAndRedirect();
+      const red = new CheckAuthenticationAndRedirect();
+      red.checkAndRedirect();
     });
   </script>
 </body>
