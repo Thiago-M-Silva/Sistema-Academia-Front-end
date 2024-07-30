@@ -1,0 +1,193 @@
+.flex-cadastro {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.card-expanded {
+    max-height: 90vh !important;
+    max-width: 80vw !important;
+    transition: width 1s ease, height 1s ease;
+    /* Adiciona uma transição suave */
+}
+
+#shadow {
+    -webkit-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 2) calc((123px + 5vw) * 2) calc((55px + 2vw) * 2) rgba(0, 0, 0, 0.9);
+    -moz-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 2) calc((123px + 5vw) * 2) calc((55px + 2vw) * 2) rgba(0, 0, 0, 0.9);
+    box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 2) calc((123px + 5vw) * 2) calc((55px + 2vw) * 2.5) rgba(0, 0, 0, 0.9);
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+#logo-login {
+    opacity: 0.94;
+    filter: invert(100%);
+}
+
+#login-illustration {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -2;
+}
+
+
+.background {
+    width: 430px;
+    height: 520px;
+    position: fixed;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+}
+
+.background .shape {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.shape:first-child {
+    background: linear-gradient(#f25249,
+            #621d3a);
+    opacity: 0.6;
+    left: -25%;
+    top: -160px;
+}
+
+.shape:last-child {
+    opacity: 0.6;
+
+    background: linear-gradient(to right,
+            #62221D,
+            #F2A649);
+    right: -25%;
+    bottom: -160px;
+}
+
+#login-card {
+    max-height: 720px;
+    max-width: 500px;
+    min-width: 350px;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+    padding: 2% 3%;
+    transition: max-height 1s ease, max-width 1s ease;
+    /* Transição suave */
+    overflow: hidden;
+    z-index: 100;
+    /* Prevenir conteúdo "saltando" */
+}
+
+#login-card * {
+    color: #f2f2f2;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+
+#login-card label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#login-card input,
+#login-card select {
+    display: block;
+    height: 50px;
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 5px;
+    padding: 0 10px;
+    font-size: 14px;
+    font-weight: 500;
+
+    option {
+        height: 50px;
+        background-color: #3f3f3f;
+        opacity: 0.07 !important;
+        font-size: 15px;
+        font-weight: 600;
+    }
+}
+
+::placeholder {
+    color: #e5e5e5;
+}
+
+.custom-btn-login {
+    opacity: 0.9;
+    width: 70%;
+    margin-top: 16px;
+    background-color: #191919;
+    color: white;
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+
+}
+
+.custom-btn-login:hover {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+.text-effect:hover {
+    color: white;
+    font-weight: 900;
+}
+
+
+
+body {
+    overflow: hidden;
+}
+
+
+@media screen and (max-width: 767px) {
+    #shadow {
+        -webkit-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
+        -moz-box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
+        box-shadow: inset calc((9px + 1vw) * 2) calc((-15px + 1vh) * 1.7) calc((123px + 5vw) * 1.7) calc((55px + 2vw) * 1.7) rgba(0, 0, 0, 0.9);
+    }
+
+    .card-expanded {
+        max-height: 100vh !important;
+        max-width: 100vw !important;
+        transition: width 1s ease, height 1s ease;
+        /* Adiciona uma transição suave */
+    }
+
+    #login-card {
+        padding: 20px 3%;
+    }
+}
+
+

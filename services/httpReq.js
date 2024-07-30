@@ -12,7 +12,16 @@ export class HttpReq {
       type: 'POST',
       contentType: 'application/json',
       data: JSON.stringify(body)
-    }).done(() => {
+    }).done((response) => {
+      // Armazena o token no localStorage
+      if (response && response.dados && response.dados.token) {
+        localStorage.setItem('jwt', response.dados.token);
+        if (body.username) {
+          localStorage.setItem('username', body.username);
+        }
+      }
+      
+      // Chama o método para verificar a autenticação e redirecionar
       this.checkAuth.checkAndRedirect();
     }).fail((xhr, status, error) => {
       let errorMessage = "Ocorreu um erro na requisição.";
@@ -36,6 +45,7 @@ export class HttpReq {
       });
     });
   }
+  
 
   httpGet(endpoint, headers) {
     return $.ajax({

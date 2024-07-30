@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bora Maromba</title>
+
+    <link href="/imports/estilo/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/imports/estilo/animate.min.css" />
+    <link rel="stylesheet" href="/imports/estilo/base.css" />
+    <link rel="stylesheet" href="login.css" />
+    
+</head>
+
+<body>
+    <img id="login-illustration" src="/assets/wallpaper.jpg" />
+    <div class="animate__animated animate__pulse animate__slower animate__infinite" id="shadow"></div>
+    
+    <div class="background animate__animated animate__fadeIn animate__faster">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <div id="login-card" class="animate__animated animate__fadeIn">
+        <div id="signin">
+            <div class="flex-column flex-center">
+                <h4 class="text-center"><b>Bora Maromba</b></h4>
+                <img id="logo-login" class="w-100 invert" src="/assets/logo.png" />
+                <form class="w-100 flex-column flex-center">
+                    <label class="w-90 text-left" for="username">Usuário</label>
+                    <input required type="text" placeholder="Insira seu email" id="username" />
+                    <label class="w-90 text-left mt-2" for="password">Senha</label>
+                    <input required type="password"  placeholder="Insira sua senha" id="password" />
+                    <button id="signin" class="custom-btn-login">Entrar</button>
+                </form>
+                <p class="text-center mt-2 op-9">
+                    Não tem uma conta?
+                    <span id="cadastrar" class="text-effect pointer">
+                        <b style="text-decoration: underline">Clique aqui</b></span>
+                </p>
+            </div>
+        </div>
+        <div id="signup" style="display: none !important">
+            <form class="flex-cadastro">
+                <div class="flex-item">
+                    <label class="w-90 text-left" for="firstname">Nome</label>
+                    <input type="text" placeholder="Seu nome" id="firstname" required />
+                </div>
+
+                <div class="flex-item">
+                    <label class="w-90 text-left mt-2" for="lastname">Sobrenome</label>
+                    <input type="text" placeholder="Seu sobrenome" id="lastname" required />
+                </div>
+                <div class="flex-item">
+                    <label class="w-90 text-left mt-2" for="email">Email</label>
+                    <input type="email" placeholder="Seu email" id="email" required />
+                </div>
+                <div class="flex-item">
+                    <label class="w-90 text-left mt-2" for="password">Senha</label>
+                    <input type="password" placeholder="Senha" id="password_registro" required />
+                </div>
+                <div class="flex-item">
+                    <label class="w-90 text-left mt-2" for="age">Idade</label>
+                    <input type="number" placeholder="Sua idade" id="age" required />
+                </div>
+                <div class="flex-item">
+                    <label class="w-90 text-left mt-2" for="weight">Peso (kg)</label>
+                    <input type="number" placeholder="Seu peso" id="weight" required />
+                </div>
+
+                <div class="flex-item">
+                    <label class="w-90 text-left mt-2" for="plan">Plano</label>
+                    <select id="plan" class="form-select" required>
+                        <option value="">Selecione seu plano</option>
+                        <option value="mensal">Mensal</option>
+                        <option value="semestral">Semestral</option>
+                        <option value="anual">Anual</option>
+                    </select>
+                </div>
+
+                <div class="flex-item">
+                    <label class="w-90 text-left mt-2" for="height">Altura (cm)</label>
+                    <input type="number" placeholder="Sua altura" id="height" required />
+                </div>
+                <div class="flex-item">
+                    <label class="w-90 text-left mt-2" for="gender">Gênero</label>
+                    <select id="gender" class="form-select" required>
+                        <option class="custom-option" value="">
+                            Selecione seu gênero
+                        </option>
+                        <option class="custom-option" value="masculino">Masculino</option>
+                        <option class="custom-option" value="feminino">Feminino</option>
+                        <option class="custom-option" value="outro">Outro</option>
+                    </select>
+                </div>
+
+                <div class="w-100 d-flex flex-center">
+                    <button type="submit" class="custom-btn-login">Registrar</button>
+                </div>
+            </form>
+            <p class="text-center mt-2 op-9">
+                Já possui uma conta?
+                <span id="login" class="text-effect pointer">
+                    <b style="text-decoration: underline">Clique aqui</b></span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Importando bibliotecas JavaScript -->
+    <script src="/imports/lib/jquery.min.js"></script>
+    <script src="/imports/lib/bootstrap.bundle.min.js"></script>
+    <script src="/imports/lib/sweetalert2.all.min.js"></script>
+    <script src="/imports/lib/rxjs.umd.min.js"></script>
+    <script type="module" src="/services/httpReq.js"></script>
+    <script type="module" src="/services/authUtils.js"></script>
+    <script type="module" src="login.js"></script>
+</body>
+
+</html>
