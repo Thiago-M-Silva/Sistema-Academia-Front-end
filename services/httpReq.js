@@ -3,6 +3,7 @@ import { CheckAuthenticationAndRedirect } from "../services/authUtils.js";
 export class HttpReq {
   constructor() {
     this.url = "https://melivra.com:8008/api/";
+    this.urlAdm = "https://melivra.com:8009/";
     this.checkAuth = new CheckAuthenticationAndRedirect();
   }
 
@@ -21,8 +22,6 @@ export class HttpReq {
         }
       }
       
-      // Chama o método para verificar a autenticação e redirecionar
-      this.checkAuth.checkAndRedirect();
     }).fail((xhr, status, error) => {
       let errorMessage = "Ocorreu um erro na requisição.";
       if (xhr.responseJSON && xhr.responseJSON.message) {
@@ -45,7 +44,6 @@ export class HttpReq {
       });
     });
   }
-  
 
   httpGet(endpoint, headers) {
     return $.ajax({
@@ -104,10 +102,11 @@ export class HttpReq {
     });
   }
 
-  httpDelete(endpoint) {
+  httpDelete(endpoint, headers) {
     return $.ajax({
       url: this.url + endpoint,
-      type: 'DELETE'
+      type: 'DELETE',
+      headers: headers
     }).fail((xhr, status, error) => {
       let errorMessage = "Ocorreu um erro na requisição.";
       if (xhr.responseJSON && xhr.responseJSON.message) {
@@ -130,4 +129,79 @@ export class HttpReq {
       });
     });
   }
+
+  httpPutJwt(endpoint, headers, body) {
+    return $.ajax({
+      url: this.url + endpoint,
+      type: 'PUT',
+      headers: headers,
+      contentType: 'application/json',
+      data: JSON.stringify(body)
+    }).fail((xhr, status, error) => {
+      let errorMessage = "Ocorreu um erro na requisição.";
+      if (xhr.responseJSON && xhr.responseJSON.message) {
+        errorMessage = xhr.responseJSON.message;
+      } else if (xhr.statusText) {
+        errorMessage = xhr.statusText;
+      }
+    })
+  }
+
+  //funcoes abaixo para adms
+  httpGetAdm(endpoint, headers) {
+    return $.ajax({
+      url: this.urlAdm + endpoint,
+      type: 'GET',
+      headers: headers
+    }).fail((xhr, status, error) => {
+      let errorMessage = "Ocorreu um erro na requisição.";
+      if (xhr.responseJSON && xhr.responseJSON.message) {
+        errorMessage = xhr.responseJSON.message;
+      } else if (xhr.statusText) {
+        errorMessage = xhr.statusText;
+      }
+    });
+  }
+
+  httpPostAdm(endpoint, body) {
+    return $.ajax({
+      url: this.urlAdm + endpoint,
+      type: 'POST',
+      contentType: 'application/json',
+      data: JSON.stringify(body)
+    }).done((response) => {
+      // Armazena o token no localStorage
+      if (response && response.dados && response.dados.token) {
+        localStorage.setItem('jwt', response.dados.token);
+        if (body.username) {
+          localStorage.setItem('username', body.username);
+        }
+      }
+      
+    }).fail((xhr, status, error) => {
+      let errorMessage = "Ocorreu um erro na requisição.";
+      if (xhr.responseJSON && xhr.responseJSON.message) {
+        errorMessage = xhr.responseJSON.message;
+      } else if (xhr.statusText) {
+        errorMessage = xhr.statusText;
+      }
+    });
+  }
+  
+
+  httpGetUser(endpoint, headers) {
+    return $.ajax({
+      url: this.urlAdm + endpoint,
+      type: 'GET',
+      headers: headers
+    }).fail((xhr, status, error) => {
+      let errorMessage = "Ocorreu um erro na requisição.";
+      if (xhr.responseJSON && xhr.responseJSON.message) {
+        errorMessage = xhr.responseJSON.message;
+      } else if (xhr.statusText) {
+        errorMessage = xhr.statusText;
+      }
+    });
+  }
+
 }

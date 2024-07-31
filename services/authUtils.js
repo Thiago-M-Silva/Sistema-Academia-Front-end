@@ -1,8 +1,5 @@
-import { of } from 'https://cdn.jsdelivr.net/npm/rxjs@6.6.7/+esm';
-import { map, catchError } from 'https://cdn.jsdelivr.net/npm/rxjs@6.6.7/operators/+esm';
 import jwt_decode from 'https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.esm.js';
-
-
+//decodifica o token jwt e faz o redirecionamento do usuario
 export class CheckAuthenticationAndRedirect {
   constructor() {
     this.jwt = localStorage.getItem('jwt');
@@ -18,7 +15,8 @@ export class CheckAuthenticationAndRedirect {
     }
   }
 
-  checkAndRedirect() {
+  //o token nao informa a role, por isso o redirecionamento funcionara pelo parametro role
+  checkAndRedirect(role) {
     if (this.jwt && this.username) {
       const decodedToken = this.decodeToken(this.jwt);
 
@@ -34,16 +32,13 @@ export class CheckAuthenticationAndRedirect {
         return;
       }
 
-      window.location.href = '/pages/client/home.html';
-
-      //document.getElementById('loggedInUser').textContent = this.username;
-      // if (decodedToken.role === 'cliente') {
-      //   window.location.href = '/pages/client/home.html';
-      // } else if (decodedToken.role === 'admin') {
-      //   window.location.href = '/pages/admin/home.html';
-      // } else {
-      //   window.location.href = '/pages/login/login.html';
-      // }
+      if (role === 'cliente') {
+        window.location.href = '/pages/client/home.html';
+      } else if (role === 'admin') {
+        window.location.href = '/pages/adm/home.html';
+      } else {
+        window.location.href = '/pages/login/login.html';
+      }
     } else {
       window.location.href = '/pages/login/login.html';
     }

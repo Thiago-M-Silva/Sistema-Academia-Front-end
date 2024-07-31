@@ -1,7 +1,11 @@
-import { HttpReq } from "../../services/httpReq.js";
+import { HttpReq } from "../../../services/httpReq.js";
+import { CheckAuthenticationAndRedirect } from "../../../services/authUtils.js";
 
 class ControllerLogin {
+  //acesso login adm http://127.0.0.1:5500/pages/adm/login/login.html
+  
   httpReq = new HttpReq();
+  checkAuth = new CheckAuthenticationAndRedirect();
 
   constructor() {
     $(document).ready(() => {
@@ -22,7 +26,7 @@ class ControllerLogin {
     const password = $("#password").val();
     const requestData = { email, password };
 
-    this.sendRequest("login", requestData);
+    this.sendRequest("api/login", requestData);
   }
 
   handleSignUp(event) {
@@ -30,21 +34,22 @@ class ControllerLogin {
     const name = $("#firstname").val() +" "+ $("#lastname").val();
     const email = $("#email").val();
     const password = $("#password_registro").val();
-    const idade = $("#age").val();
-    const peso = $("#weight").val();
-    const altura = $("#height").val();
-    const plano = $("#plan").val();
-    const requestData = { name, email, password, idade, peso, altura, plano };
+    const gerente = true; //cenario teste
+    const professor = false; //cenario teste
+    const recepcionista = false; //cenario teste
+    //as informacoes acima sao necessarias para o cadastro de adm
+    const requestData = { name, email, password, gerente, professor, recepcionista };
 
-    this.sendRequest("registrar", requestData);
+    this.sendRequest("api/registrar", requestData);
   }
-
+  // postAdm para diferenciar do que e utilizado pelos clientes
   sendRequest(endpoint, data) {
     this.httpReq
-      .httpPost(endpoint, data)
+      .httpPostAdm(endpoint, data)
       .done((response) => {
         console.log("Dados recebidos:", response);
-        // Aqui você pode lidar com a resposta da API
+        // Chama o método para verificar a autenticação e redirecionar
+        this.checkAuth.checkAndRedirect('admin');
       })
       .fail((error) => {
         console.error("Erro na requisição:", error);

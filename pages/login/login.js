@@ -1,7 +1,9 @@
 import { HttpReq } from "../../services/httpReq.js";
+import { CheckAuthenticationAndRedirect } from "../../services/authUtils.js";
 
 class ControllerLogin {
   httpReq = new HttpReq();
+  checkAuth = new CheckAuthenticationAndRedirect();
 
   constructor() {
     $(document).ready(() => {
@@ -44,7 +46,8 @@ class ControllerLogin {
       .httpPost(endpoint, data)
       .done((response) => {
         console.log("Dados recebidos:", response);
-        // Aqui você pode lidar com a resposta da API
+        // Chama o método para verificar a autenticação e redirecionar
+        this.checkAuth.checkAndRedirect('cliente');
       })
       .fail((error) => {
         console.error("Erro na requisição:", error);
