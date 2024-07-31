@@ -25,7 +25,7 @@ export class Adm {
     }
 
     getUsuarios(){
-        const endpoint = 'user/getAll';
+        const endpoint = 'user/All';
         const headers = {
             'Authorization': 'Bearer ' + this.jwt
         };
