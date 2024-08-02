@@ -10,7 +10,7 @@ export class Adm {
     }
 
     logout(){
-        const endpoint = 'api/logout';
+        const endpoint = 'logout';
         const headers = {
             'Authorization': 'Bearer ' + this.jwt
         };
@@ -18,6 +18,7 @@ export class Adm {
             .httpGetAdm(endpoint, headers)
             .done((response) => {
                 console.log(response);
+                this.checkRed.checkAndRedirect();
             })
             .fail((error) => {
                 console.log("Erro na requisicao: ", error);

@@ -3,7 +3,7 @@ import { CheckAuthenticationAndRedirect } from "../services/authUtils.js";
 export class HttpReq {
   constructor() {
     this.url = "https://melivra.com:8008/api/";
-    this.urlAdm = "https://melivra.com:8009/";
+    this.urlAdm = "https://melivra.com:8009/api/";
     this.checkAuth = new CheckAuthenticationAndRedirect();
   }
 

@@ -40,7 +40,7 @@ class ControllerLogin {
     //as informacoes acima sao necessarias para o cadastro de adm
     const requestData = { name, email, password, gerente, professor, recepcionista };
 
-    this.sendRequest("api/registrar", requestData);
+    this.sendRequest("registrar", requestData);
   }
   // postAdm para diferenciar do que e utilizado pelos clientes
   sendRequest(endpoint, data) {

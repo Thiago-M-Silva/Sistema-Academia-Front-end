@@ -42,7 +42,6 @@ class Client {
             });
     }
 
-    //erro 400
     attTreino(body){
         const endpoint = 'treino';
         const headers = {
@@ -50,13 +49,13 @@ class Client {
         };
 
         body = {
-            domingo: 'descanso',
-            segunda: 'perna',
-            terca: 'core',
-            quarta: 'peito',
-            quinta: 'braco',
-            sexta: 'costas',
-            sabado: 'cardio',
+            'domingo': 'descanso',
+            'segunda-feira': 'perna',
+            'terca-feira': 'core',
+            'quarta-feira': 'peito',
+            'quinta-feira': 'braco',
+            'sexta-feira': 'costas',
+            'sabado': 'cardio',
         };
 
         this.httpReq
