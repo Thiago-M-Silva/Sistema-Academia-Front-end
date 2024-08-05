@@ -3,7 +3,6 @@ import jwt_decode from 'https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-
 export class CheckAuthenticationAndRedirect {
   constructor() {
     this.jwt = localStorage.getItem('jwt');
-    this.username = localStorage.getItem('username');
   }
 
   decodeToken(token) {
@@ -17,7 +16,7 @@ export class CheckAuthenticationAndRedirect {
 
   //o token nao informa a role, por isso o redirecionamento funcionara pelo parametro role
   checkAndRedirect(role) {
-    if (this.jwt && this.username) {
+    if (this.jwt) {
       const decodedToken = this.decodeToken(this.jwt);
 
       if (!decodedToken) {

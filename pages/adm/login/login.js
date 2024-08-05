@@ -26,7 +26,7 @@ class ControllerLogin {
     const password = $("#password").val();
     const requestData = { email, password };
 
-    this.sendRequest("api/login", requestData);
+    this.sendRequest("login", requestData);
   }
 
   handleSignUp(event) {

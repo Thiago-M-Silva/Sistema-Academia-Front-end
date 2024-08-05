@@ -185,6 +185,19 @@ export class HttpReq {
       } else if (xhr.statusText) {
         errorMessage = xhr.statusText;
       }
+      Swal.fire({
+        icon: 'error',
+        title: 'Erro',
+        text: errorMessage,
+        customClass: {
+          popup: 'swal2-popup-custom',
+          icon: 'swal2-icon-custom',
+          confirmButton: 'swal2-confirm',
+          cancelButton: 'swal2-cancel'
+        },
+        background: '#000',
+        backdrop: 'rgba(0, 0, 0, 0.4)'
+      });
     });
   }
   
