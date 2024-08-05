@@ -48,8 +48,7 @@ class ControllerLogin {
       .httpPostAdm(endpoint, data)
       .done((response) => {
         console.log("Dados recebidos:", response);
-        // Chama o método para verificar a autenticação e redirecionar
-        this.checkAuth.checkAndRedirect('admin');
+        this.sucesso();
       })
       .fail((error) => {
         console.error("Erro na requisição:", error);
@@ -84,6 +83,12 @@ class ControllerLogin {
     $("#login-card").css({
       "animation": "transicaoSaida 2s forwards"
     });
+
+    // Aguarde o término da animação CSS antes de redirecionar
+    const animationDuration = 2000; // Duração da animação em milissegundos (2 segundos)
+    setTimeout(async () => {
+      await this.checkAuth.checkAndRedirect('admin');
+    }, animationDuration);
   }
 
   listenerCadastro() {
