@@ -46,6 +46,10 @@ class ControllerLogin {
       .httpPost(endpoint, data)
       .done((response) => {
         console.log("Dados recebidos:", response);
+
+        if (response.dados.token != null && endpoint == "registrar") {
+          console.log("entrei");
+        }
         // Chama o método para verificar a autenticação e redirecionar
         this.sucesso();
       })
