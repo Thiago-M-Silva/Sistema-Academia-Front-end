@@ -41,10 +41,20 @@ export class Adm {
                 console.log("Erro na requisicao: ", error);
             })
     }
+
+    onInit(){
+        this.checkRed.saiInvasor();
+    }
    
 }
 
 const adm = new Adm();
+
+//evitar que a pagina esteja sendo acessada por outros meios
+document.addEventListener('DOMContentLoaded', function() {
+    client.onInit();
+});
+
 
 // Associando os botões aos métodos da classe
 document.getElementById('logoutBtn').onclick = () => adm.logout();

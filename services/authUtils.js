@@ -1,5 +1,5 @@
 import jwt_decode from 'https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.esm.js';
-//decodifica o token jwt e faz o redirecionamento do usuario
+
 export class CheckAuthenticationAndRedirect {
   constructor() {
     this.jwt = localStorage.getItem('jwt');
@@ -14,7 +14,6 @@ export class CheckAuthenticationAndRedirect {
     }
   }
 
-  //o token nao informa a role, por isso o redirecionamento funcionara pelo parametro role
   checkAndRedirect(role) {
     if (this.jwt) {
       const decodedToken = this.decodeToken(this.jwt);
@@ -39,6 +38,15 @@ export class CheckAuthenticationAndRedirect {
         window.location.href = '/pages/login/login.html';
       }
     } else {
+      window.location.href = '/pages/login/login.html';
+    }
+  }
+
+  //verifica se o token esta disponivel e se e o correto
+  //redirecniona para a pagina de login caso nao exista token ou se estiver errado
+  saiInvasor(){ 
+    const token = localStorage.getItem('jwt');
+    if (!token || !this.decodeToken(token)) {
       window.location.href = '/pages/login/login.html';
     }
   }
