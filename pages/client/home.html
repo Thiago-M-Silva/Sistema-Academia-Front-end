@@ -15,29 +15,28 @@
     <div class="animate__animated animate__pulse animate__slower animate__infinite" id="shadow"></div>
     
 
-    <div class="container center">
-      
+    <div class="container center">      
         <div class="row ">
             <div class="col-md-4">
-                <div class="card card-base  animate__animated animate__fadeIn">
+                <div  id="attTreinoBtn" class="card card-base  escurecer-hv pointer  animate__animated animate__fadeIn">
                     <div class="card-body text-center">
                         <i class="fas fa-dumbbell fa-3x"></i>
                         <h5 class="card-title mt-3">Novo Treino</h5>
-                        <p class="card-text">Iniciar um novo treino.</p>
+                        <p class="card-text">Refazer meus treinos.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card card-base  animate__animated  animate__fadeIn">
+                <div id="getTreinoBtn" class="card card-base  escurecer-hv pointer  animate__animated  animate__fadeIn">
                     <div class="card-body text-center">
                         <i class="fas fa-eye fa-3x"></i>
                         <h5 class="card-title mt-3">Ver Treinos</h5>
-                        <p class="card-text">Visualizar treinos anteriores.</p>
+                        <p class="card-text">Visualizar meus treinos cadastrados.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div id="logoutBtn" class="card card-base animate__animated animate__fadeIn">
+                <div id="logoutBtn" class="card card-base  escurecer-hv pointer animate__animated animate__fadeIn">
                     <div class="card-body text-center">
                         <i class="fas fa-sign-out-alt fa-3x"></i>
                         <h5 class="card-title mt-3">Sair</h5>
@@ -47,6 +46,54 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="treinoModal" tabindex="-1" aria-labelledby="treinoModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content card-base">
+                <div class="modal-header d-flex justify-content-between">
+                    <h5 class="modal-title" id="treinoModalLabel">Atualizar Treino</h5>
+                    <button type="button" class="btn-close custom-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="treinoForm">
+                        <div class="form-group">
+                            <label for="segunda-feira">Segunda-feira</label>
+                            <input type="text" class="form-control" id="segunda-feira" name="segunda-feira" value="perna">
+                        </div>
+                        <div class="form-group">
+                            <label for="terca-feira">Terça-feira</label>
+                            <input type="text" class="form-control" id="terca-feira" name="terca-feira" value="core">
+                        </div>
+                        <div class="form-group">
+                            <label for="quarta-feira">Quarta-feira</label>
+                            <input type="text" class="form-control" id="quarta-feira" name="quarta-feira" value="peito">
+                        </div>
+                        <div class="form-group">
+                            <label for="quinta-feira">Quinta-feira</label>
+                            <input type="text" class="form-control" id="quinta-feira" name="quinta-feira" value="braço">
+                        </div>
+                        <div class="form-group">
+                            <label for="sexta-feira">Sexta-feira</label>
+                            <input type="text" class="form-control" id="sexta-feira" name="sexta-feira" value="costas">
+                        </div>
+                        <div class="form-group">
+                            <label for="sabado">Sábado</label>
+                            <input type="text" class="form-control" id="sabado" name="sabado" value="cardio">
+                        </div>
+                        <div class="form-group">
+                            <label for="domingo">Domingo</label>
+                            <input type="text" class="form-control" id="domingo" name="domingo" value="descanso">
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <script src="/imports/lib/jquery.min.js"></script>
     <script src="/imports/lib/bootstrap.bundle.min.js"></script>

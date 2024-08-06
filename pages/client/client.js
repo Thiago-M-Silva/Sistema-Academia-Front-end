@@ -99,7 +99,37 @@ class Client {
                 }
             });
         };
-            // document.getElementById('getTreinoBtn').onclick = () => client.getTreino();
+        
+      
+        // Quando o botão 'attTreinoBtn' é clicado
+        $('#attTreinoBtn').click(function() {
+            // Mostrar o modal
+            $('#treinoModal').modal('show');
+
+            // Remover o evento de clique antigo (se houver)
+            $('#salvarTreinoBtn').off('click');
+
+            // Adicionar o novo evento de clique para 'salvarTreinoBtn'
+            $('#salvarTreinoBtn').click(function() {
+                // Coletar os dados do formulário
+                const treinoData = {
+                    'segunda-feira': $('#segunda-feira').val(),
+                    'terca-feira': $('#terca-feira').val(),
+                    'quarta-feira': $('#quarta-feira').val(),
+                    'quinta-feira': $('#quinta-feira').val(),
+                    'sexta-feira': $('#sexta-feira').val(),
+                    'sabado': $('#sabado').val(),
+                    'domingo': $('#domingo').val(),
+                };
+
+                // Chamar o método attTreino com os dados do formulário
+                client.attTreino(treinoData);
+
+                // Fechar o modal
+                $('#treinoModal').modal('hide');
+            });
+        });
+        
         // document.getElementById('attTreinoBtn').onclick = () => client.attTreino();
         // document.getElementById('delTreinoBtn').onclick = () => client.delTreino();
 
