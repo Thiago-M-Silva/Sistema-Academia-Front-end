@@ -82,13 +82,31 @@ class Client {
                 console.log("Erro na requisicao: ", error);
             });
     }
+
+    listener(){
+        // Associando os botões aos métodos da classe
+        document.getElementById('logoutBtn').onclick = () => {
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você realmente quer sair?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, sair',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    client.logout();
+                }
+            });
+        };
+            // document.getElementById('getTreinoBtn').onclick = () => client.getTreino();
+        // document.getElementById('attTreinoBtn').onclick = () => client.attTreino();
+        // document.getElementById('delTreinoBtn').onclick = () => client.delTreino();
+
+    }
 }
 
 // Instancia a classe Client
 const client = new Client();
 
-// Associando os botões aos métodos da classe
-document.getElementById('logoutBtn').onclick = () => client.logout();
-document.getElementById('getTreinoBtn').onclick = () => client.getTreino();
-document.getElementById('attTreinoBtn').onclick = () => client.attTreino();
-document.getElementById('delTreinoBtn').onclick = () => client.delTreino();
+client.listener();

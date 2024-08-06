@@ -29,7 +29,7 @@ class ControllerLogin {
 
   handleSignUp(event) {
     event.preventDefault();
-    const name = $("#firstname").val() +" "+ $("#lastname").val();
+    const name = $("#firstname").val() + " " + $("#lastname").val();
     const email = $("#email").val();
     const password = $("#password_registro").val();
     const idade = $("#age").val();
@@ -47,9 +47,7 @@ class ControllerLogin {
       .done((response) => {
         console.log("Dados recebidos:", response);
 
-        if (response.dados.token != null && endpoint == "registrar") {
-          console.log("entrei");
-        }
+
         // Chama o método para verificar a autenticação e redirecionar
         this.sucesso();
       })
@@ -78,19 +76,23 @@ class ControllerLogin {
     // Utilize o método de promessas do jQuery corretamente
     await Promise.all([
       $("#login-card").find("*").fadeOut(500).promise(),
-      $("#login-card").append("<span class='text-center white' style='font-size: 48px' >&#x2713</span>").hide().fadeIn(500),
+      $("#login-card").append("<span class='text-center white' style='font-size: 48px' ></span>").hide().fadeIn(500),
       $(".shape").fadeOut(500).promise()
     ]);
 
+    await Promise.all([
+      $("#login-card").css({
+        "animation": "transicaoSaida 2s forwards"
+      })
+    ]);
+
     // Após o término das animações, aplique o CSS com a animação desejada
-    $("#login-card").css({
-      "animation": "transicaoSaida 2s forwards"
-    });
+
 
     // Aguarde o término da animação CSS antes de redirecionar
     const animationDuration = 2000; // Duração da animação em milissegundos (2 segundos)
     setTimeout(async () => {
-      await this.checkAuth.checkAndRedirect('cliente');
+      this.checkAuth.checkAndRedirect('cliente');
     }, animationDuration);
   }
 
