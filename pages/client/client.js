@@ -18,7 +18,8 @@ class Client {
             .httpGet(endpoint, headers)
             .done((response) => {
                 console.log(response);
-                this.checkRed.checkAndRedirect();
+                localStorage.removeItem('jwt'); // Remover o JWT após logout
+                this.checkRed.checkAndRedirect(); // Agora sem parâmetro, deve redirecionar para login
             })
             .fail((error) => {
                 console.log("Erro na requisicao: ", error);
@@ -82,6 +83,10 @@ class Client {
             .fail((error) => {
                 console.log("Erro na requisicao: ", error);
             });
+    }
+    
+    onInit(){
+        this.checkRed.saiInvasor();
     }
 
     listener(){
@@ -164,5 +169,6 @@ class Client {
 
 // Instancia a classe Client
 const client = new Client();
-
 client.listener();
+client.onInit();
+

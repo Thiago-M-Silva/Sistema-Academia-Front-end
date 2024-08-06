@@ -42,4 +42,13 @@ export class CheckAuthenticationAndRedirect {
       window.location.href = '/pages/login/login.html';
     }
   }
+
+  //verifica se o token esta disponivel e se e o correto
+  //redirecniona para a pagina de login caso nao exista token ou se estiver errado
+  saiInvasor(){ 
+    const token = localStorage.getItem('jwt');
+    if (!token || !this.decodeToken(token)) {
+      window.location.href = '/pages/login/login.html';
+    }
+  }
 }
