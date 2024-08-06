@@ -20,46 +20,37 @@ class Client {
                 console.log(response);
                 localStorage.removeItem('jwt'); // Remover o JWT após logout
                 this.checkRed.checkAndRedirect(); // Agora sem parâmetro, deve redirecionar para login
-                localStorage.removeItem('jwt'); // Remover o JWT após logout
-                this.checkRed.checkAndRedirect(); // Agora sem parâmetro, deve redirecionar para login
             })
             .fail((error) => {
                 console.log("Erro na requisicao: ", error);
             });
     }
 
-    getTreino(){
+    getTreino() {
         const endpoint = 'treino';
         const headers = {
             'Authorization': 'Bearer ' + this.jwt
         };
-        this.httpReq
-            .httpGet(endpoint, headers)
-            .done((response) => {
-                console.log(response);
-                this.dados = response.dados;
-                console.log(this.dados);
-                return this.dados;
-            })
-            .fail((error) => {
-                console.log("Erro na requisicao: ", error);
-            });
+        return new Promise((resolve, reject) => {
+            this.httpReq
+                .httpGet(endpoint, headers)
+                .done((response) => {
+                    console.log(response);
+                    console.log(response.dados);
+                    this.dados = response.dados;
+                    resolve(this.dados);
+                })
+                .fail((error) => {
+                    console.log("Erro na requisição: ", error);
+                    reject(error);
+                });
+        });
     }
 
     attTreino(body){
         const endpoint = 'treino';
         const headers = {
             'Authorization': 'Bearer ' + this.jwt
-        };
-
-        body = {
-            'domingo': 'descanso',
-            'segunda-feira': 'perna',
-            'terca-feira': 'core',
-            'quarta-feira': 'peito',
-            'quinta-feira': 'braco',
-            'sexta-feira': 'costas',
-            'sabado': 'cardio',
         };
 
         this.httpReq
@@ -85,10 +76,6 @@ class Client {
             .fail((error) => {
                 console.log("Erro na requisicao: ", error);
             });
-    }
-    
-    onInit(){
-        this.checkRed.saiInvasor();
     }
     
     onInit(){
@@ -143,31 +130,29 @@ class Client {
         });  
         
         $('#getTreinoBtn').click(async function() {
-            // Mostrar o modal
-            let dados = {
-                "segundaFeira": "perna",
-                "tercaFeira": "core",
-                "quartaFeira": "peito",
-                "quintaFeira": "braco",
-                "sextaFeira": "costas",
-                "sabado": "cardio",
-                "domingo": "descanso"
-            };
-
-            // Preencher a tabela com os dados
-            let tabelaCorpo = $('#treinoTabelaCorpo');
-            tabelaCorpo.empty(); // Limpar o conteúdo atual da tabela
-
-            for (let dia in dados) {
-                tabelaCorpo.append(`
-                    <tr>
-                        <td>${dia.charAt(0).toUpperCase() + dia.slice(1).replace(/([A-Z])/g, ' $1').toLowerCase()}</td>
-                        <td>${dados[dia]}</td>
-                    </tr>
-                `);
+            try {
+                // Executar a requisição e aguardar a resposta
+                let dados = await client.getTreino();
+        
+                // Preencher a tabela com os dados
+                let tabelaCorpo = $('#treinoTabelaCorpo');
+                tabelaCorpo.empty(); // Limpar o conteúdo atual da tabela
+        
+                for (let dia in dados) {
+                    tabelaCorpo.append(`
+                        <tr>
+                            <td>${dia.charAt(0).toUpperCase() + dia.slice(1).replace(/([A-Z])/g, ' $1').toLowerCase()}</td>
+                            <td>${dados[dia]}</td>
+                        </tr>
+                    `);
+                }
+        
+                // Mostrar o modal após preencher a tabela
+                $('#treinoModalVisualizacao').modal('show');
+            } catch (error) {
+                console.error('Erro ao obter dados do treino:', error);
+                // O SweetAlert será chamado automaticamente no httpGet em caso de falha
             }
-
-            $('#treinoModalVisualizacao').modal('show');
         });
         
     }
