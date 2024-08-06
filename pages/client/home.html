@@ -47,7 +47,32 @@
         </div>
     </div>
 
+    <!-- Modal de Visualização de Treinos -->
+    <div class="modal fade" id="treinoModalVisualizacao" tabindex="-1" aria-labelledby="treinoModalVisualizacaoLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content card-base">
+                <div class="modal-header d-flex justify-content-between">
+                    <h4 class="modal-title" id="treinoModalVisualizacaoLabel">Visualizar Treinos</h4>
+                    <button type="button" class="btn-close custom-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Dia da Semana</th>
+                                <th>Atividade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="treinoTabelaCorpo">
+                            <!-- Dados da tabela serão preenchidos aqui pelo JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    
     <div class="modal fade" id="treinoModal" tabindex="-1" aria-labelledby="treinoModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content card-base">

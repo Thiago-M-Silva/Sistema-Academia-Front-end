@@ -36,6 +36,7 @@ class Client {
                 console.log(response);
                 this.dados = response.dados;
                 console.log(this.dados);
+                return this.dados;
             })
             .fail((error) => {
                 console.log("Erro na requisicao: ", error);
@@ -128,11 +129,36 @@ class Client {
                 // Fechar o modal
                 $('#treinoModal').modal('hide');
             });
+        });  
+        
+        $('#getTreinoBtn').click(async function() {
+            // Mostrar o modal
+            let dados = {
+                "segundaFeira": "perna",
+                "tercaFeira": "core",
+                "quartaFeira": "peito",
+                "quintaFeira": "braco",
+                "sextaFeira": "costas",
+                "sabado": "cardio",
+                "domingo": "descanso"
+            };
+
+            // Preencher a tabela com os dados
+            let tabelaCorpo = $('#treinoTabelaCorpo');
+            tabelaCorpo.empty(); // Limpar o conteúdo atual da tabela
+
+            for (let dia in dados) {
+                tabelaCorpo.append(`
+                    <tr>
+                        <td>${dia.charAt(0).toUpperCase() + dia.slice(1).replace(/([A-Z])/g, ' $1').toLowerCase()}</td>
+                        <td>${dados[dia]}</td>
+                    </tr>
+                `);
+            }
+
+            $('#treinoModalVisualizacao').modal('show');
         });
         
-        // document.getElementById('attTreinoBtn').onclick = () => client.attTreino();
-        // document.getElementById('delTreinoBtn').onclick = () => client.delTreino();
-
     }
 }
 
