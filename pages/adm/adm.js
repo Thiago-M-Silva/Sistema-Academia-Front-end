@@ -52,6 +52,12 @@ const adm = new Adm();
 adm.onInit();
 
 
+//evitar que a pagina esteja sendo acessada por outros meios
+document.addEventListener('DOMContentLoaded', function() {
+    client.onInit();
+});
+
+
 // Associando os botões aos métodos da classe
 document.getElementById('logoutBtn').onclick = () => adm.logout();
 document.getElementById('getUsuariosBtn').onclick = () => adm.getUsuarios();

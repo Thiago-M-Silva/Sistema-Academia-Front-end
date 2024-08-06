@@ -20,6 +20,8 @@ class Client {
                 console.log(response);
                 localStorage.removeItem('jwt'); // Remover o JWT após logout
                 this.checkRed.checkAndRedirect(); // Agora sem parâmetro, deve redirecionar para login
+                localStorage.removeItem('jwt'); // Remover o JWT após logout
+                this.checkRed.checkAndRedirect(); // Agora sem parâmetro, deve redirecionar para login
             })
             .fail((error) => {
                 console.log("Erro na requisicao: ", error);
@@ -83,6 +85,10 @@ class Client {
             .fail((error) => {
                 console.log("Erro na requisicao: ", error);
             });
+    }
+    
+    onInit(){
+        this.checkRed.saiInvasor();
     }
     
     onInit(){
