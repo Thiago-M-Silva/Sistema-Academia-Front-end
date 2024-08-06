@@ -1,0 +1,8 @@
+.card-base {
+    color: white;
+    transition: background-color 0.2s ease; /* Transição suave para a cor de fundo */
+}
+
+.escurecer-hv:hover{
+    background-color: rgba(0, 0, 0, 0.3);
+}

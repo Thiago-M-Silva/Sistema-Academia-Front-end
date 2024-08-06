@@ -4,17 +4,108 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link href="/imports/estilo/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/imports/estilo/animate.min.css" />
+    <link rel="stylesheet" href="/imports/estilo/base.css" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 </head>
 <body>
-    <link rel="stylesheet" href="/imports/estilo/base.css" />
-
     <img id="bg-illustration" src="/assets/wallpaper.jpg" />
     <div class="animate__animated animate__pulse animate__slower animate__infinite" id="shadow"></div>
     
-     <script src="/imports/lib/jquery.min.js"></script>
-     <script src="/imports/lib/bootstrap.bundle.min.js"></script>
-     <script src="/imports/lib/sweetalert2.all.min.js"></script>
-     <script src="/imports/lib/rxjs.umd.min.js"></script>
-     <script type="module" src="/pages/adm/adm.js"></script>
+
+    <div class="container center">      
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div  id="getUsuariosBtn" class="card card-base  escurecer-hv pointer  animate__animated animate__fadeIn">
+                    <div class="card-body text-center">
+                        <i class="fas fa-user fa-3x"></i>
+                        <h5 class="card-title mt-3">Gerenciar Usuarios</h5>
+                        <p class="card-text">Fazer o controle de usuários.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="logoutBtn" class="card card-base  escurecer-hv pointer animate__animated animate__fadeIn">
+                    <div class="card-body text-center">
+                        <i class="fas fa-sign-out-alt fa-3x"></i>
+                        <h5 class="card-title mt-3">Sair</h5>
+                        <p class="card-text">Encerrar a sessão.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="dataModal" tabindex="-1" aria-labelledby="dataModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="dataModalLabel">User Data</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Table -->
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Idade</th>
+                                    <th>Peso</th>
+                                    <th>Altura</th>
+                                    <th>Segunda-Feira</th>
+                                    <th>Terça-Feira</th>
+                                    <th>Quarta-Feira</th>
+                                    <th>Quinta-Feira</th>
+                                    <th>Sexta-Feira</th>
+                                    <th>Sábado</th>
+                                    <th>Domingo</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dataTableBody">
+                                <!-- Data rows will be inserted here by Mustache -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="saveChanges">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script id="template" type="text/x-mustache-template">
+            {{#data}}
+            <tr data-id="{{email}}">
+                <td contenteditable="true">{{name}}</td>
+                <td contenteditable="true">{{idade}}</td>
+                <td contenteditable="true">{{peso}}</td>
+                <td contenteditable="true">{{altura}}</td>
+                <td contenteditable="true">{{segundaFeira}}</td>
+                <td contenteditable="true">{{tercaFeira}}</td>
+                <td contenteditable="true">{{quartaFeira}}</td>
+                <td contenteditable="true">{{quintaFeira}}</td>
+                <td contenteditable="true">{{sextaFeira}}</td>
+                <td contenteditable="true">{{sabado}}</td>
+                <td contenteditable="true">{{domingo}}</td>
+                <td>{{email}}</td>
+                <td><button type="button" class="btn btn-danger btn-sm delete-row">Delete</button></td>
+            </tr>
+            {{/data}}
+        </script>
+
+ 
+    <script src="/imports/lib/jquery.min.js"></script>
+    <script src="/imports/lib/mustache.min.js"></script>
+    <script src="/imports/lib/bootstrap.bundle.min.js"></script>
+    <script src="/imports/lib/sweetalert2.all.min.js"></script>
+    <script src="/imports/lib/rxjs.umd.min.js"></script>
+    <script type="module" src="/pages/adm/adm.js"></script>
 </body>
 </html>

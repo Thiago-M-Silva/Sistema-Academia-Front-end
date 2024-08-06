@@ -62,7 +62,7 @@ class ControllerLogin {
       const $passwordField = $("#" + targetId);
 
       if ($passwordField.attr("type") === "password") {
-        $passwordField.attr("type", "text");
+        $passwordField.attr("type", "text");  
         $(this).text("Esconder Senha");
       } else {
         $passwordField.attr("type", "password");
@@ -75,7 +75,7 @@ class ControllerLogin {
     // Utilize o método de promessas do jQuery corretamente
     await Promise.all([
       $("#login-card").find("*").fadeOut(500).promise(),
-      $("#login-card").append("<span class='text-center white' style='font-size: 48px' >&#x2713</span>").hide().fadeIn(500),
+      $("#login-card").append("<span class='text-center white' style='font-size: 48px' ></span>").hide().fadeIn(500),
       $(".shape").fadeOut(500).promise()
     ]);
 
