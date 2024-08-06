@@ -1,3 +1,10 @@
 .card-base {
     color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease; /* Transição suave para a cor de fundo */
+
+}
+
+.card-base:hover{
+    background-color: rgba(0, 0, 0, 0.3);
 }
