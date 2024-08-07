@@ -47,22 +47,15 @@ class Client {
         });
     }
 
-    attTreino(body){
+    attTreino(body) {
         const endpoint = 'treino';
         const headers = {
             'Authorization': 'Bearer ' + this.jwt
         };
-
-        this.httpReq
-            .httpPutJwt(endpoint, headers, body)
-            .done((response) => {
-                console.log(response);
-            })
-            .fail((error) => {
-                console.log("Erro na requisicao: ", error);
-            });
+        
+        console.log(body);
+        return this.httpReq.httpPutJwt(endpoint, headers, body);
     }
-
     delTreino(){
         const endpoint = 'treino';
         const headers = {
@@ -100,7 +93,7 @@ class Client {
         };
         
       
-        // Quando o botão 'attTreinoBtn' é clicado
+       // Quando o botão 'attTreinoBtn' é clicado
         $('#attTreinoBtn').click(function() {
             // Mostrar o modal
             $('#treinoModal').modal('show');
@@ -109,7 +102,7 @@ class Client {
             $('#salvarTreinoBtn').off('click');
 
             // Adicionar o novo evento de clique para 'salvarTreinoBtn'
-            $('#salvarTreinoBtn').click(function() {
+            $('#salvarTreinoBtn').click(async function() {
                 // Coletar os dados do formulário
                 const treinoData = {
                     'segunda-feira': $('#segunda-feira').val(),
@@ -121,13 +114,18 @@ class Client {
                     'domingo': $('#domingo').val(),
                 };
 
-                // Chamar o método attTreino com os dados do formulário
-                client.attTreino(treinoData);
-
-                // Fechar o modal
-                $('#treinoModal').modal('hide');
+                try {
+                    // Chamar o método attTreino com os dados do formulário
+                    client.attTreino(treinoData);
+                    console.log(treinoData)
+                    // Fechar o modal
+                    $('#treinoModal').modal('hide');
+                } catch (error) {
+                    console.log("Erro na requisição: ", error);
+                    // O SweetAlert será chamado automaticamente no httpPutJwt em caso de falha
+                }
             });
-        });  
+        });
         
         $('#getTreinoBtn').click(async function() {
             try {
