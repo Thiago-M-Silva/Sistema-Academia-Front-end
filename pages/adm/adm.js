@@ -30,17 +30,19 @@ export class Adm {
         const headers = {
             'Authorization': 'Bearer ' + this.jwt
         };
-        this.httpReq
+        return this.httpReq
             .httpGetUser(endpoint, headers)
             .done((response) => {
                 console.log(response);
                 this.dados = response.dados;
-                console.log(this.dados);
+                return this.dados; // Certifique-se de retornar os dados
             })
             .fail((error) => {
                 console.log("Erro na requisicao: ", error);
-            })
+                return [];
+            });
     }
+    
 
     onInit() {
         this.checkRed.saiInvasor();
@@ -48,18 +50,12 @@ export class Adm {
 
 
     listener() {
-
-        document.getElementById('logoutBtn').onclick = () => adm.logout();
-
-
-        $('#getUsuariosBtn').click(function () {
-
-            let dados = adm.getUsuarios();
-            console.log(dados);
-
-
-            const data = [
-                // Your JSON data goes here
+        document.getElementById('logoutBtn').onclick = () => this.logout();
+    
+        $('#getUsuariosBtn').click(async () => {
+            // Simulate fetching data
+            const dados = [
+                // Example data
                 {
                     "name": "teste",
                     "idade": " ",
@@ -76,38 +72,77 @@ export class Adm {
                     "email": "filhoandre53468100@gmail.com"
                 },
             ];
-
-            // Render table
-            const template = $('#template').html();
-            const rendered = Mustache.render(template, { data });
-            $('#dataTableBody').html(rendered);
-
+    
+            // Prepares the data for Grid.js
+            const gridData = dados.map(user => ([
+                user.name,
+                '<button type="button" class="btn btn-danger btn-sm delete-row">Delete</button>',
+                user.idade,
+                user.peso,
+                user.altura,
+                user.segundaFeira,
+                user.tercaFeira,
+                user.quartaFeira,
+                user.quintaFeira,
+                user.sextaFeira,
+                user.sabado,
+                user.domingo,
+                user.email,
+            ]));
+    
+            // Initialize Grid.js
+            new gridjs.Grid({
+                columns: [
+                    'Nome',
+                    {
+                        name: 'Ação',
+                        formatter: (cell) => gridjs.html(cell)
+                    },
+                    'Idade',
+                    'Peso',
+                    'Altura',
+                    'Segunda-Feira',
+                    'Terça-Feira',
+                    'Quarta-Feira',
+                    'Quinta-Feira',
+                    'Sexta-Feira',
+                    'Sábado',
+                    'Domingo',
+                    'Email'
+                ],
+                data: gridData,
+                pagination: true,
+                search: true,
+                sort: true
+            }).render(document.getElementById('grid'));
+    
+            $('#dataModal').modal('show');
+    
             // Handle save button click
-            $('#saveChanges').on('click', function () {
-                const rows = $('#dataTableBody tr');
-                const updatedData = [];
-                rows.each(function () {
-                    const row = $(this);
-                    const rowData = {
-                        name: row.find('td').eq(0).text(),
-                        idade: row.find('td').eq(1).text(),
-                        peso: row.find('td').eq(2).text(),
-                        altura: row.find('td').eq(3).text(),
-                        segundaFeira: row.find('td').eq(4).text(),
-                        tercaFeira: row.find('td').eq(5).text(),
-                        quartaFeira: row.find('td').eq(6).text(),
-                        quintaFeira: row.find('td').eq(7).text(),
-                        sextaFeira: row.find('td').eq(8).text(),
-                        sabado: row.find('td').eq(9).text(),
-                        domingo: row.find('td').eq(10).text(),
-                        email: row.data('id')
-                    };
-                    updatedData.push(rowData);
-                });
-
+            $('#saveChanges').on('click', () => {
+                const updatedData = gridData.map(row => ({
+                    name: row[0],
+                    idade: row[2],
+                    peso: row[3],
+                    altura: row[4],
+                    segundaFeira: row[5],
+                    tercaFeira: row[6],
+                    quartaFeira: row[7],
+                    quintaFeira: row[8],
+                    sextaFeira: row[9],
+                    sabado: row[10],
+                    domingo: row[11],
+                    email: row[12]
+                }));
+    
                 // Do something with updatedData, e.g., send to server
                 console.log('Updated Data:', updatedData);
             });
+    
+            setTimeout(() => {
+                $('[data-column-id="nome"]').click();
+
+            }, 200);
 
             // Handle delete button click
             $(document).on('click', '.delete-row', function () {
@@ -115,6 +150,8 @@ export class Adm {
             });
         });
     }
+    
+    
 }
 
 const adm = new Adm();
