@@ -25,21 +25,20 @@ export class Adm {
             })
     }
 
-    getUsuarios() {
+    async getUsuarios() {
         const endpoint = 'user/All';
         const headers = {
             'Authorization': 'Bearer ' + this.jwt
         };
-        return this.httpReq
+        return await this.httpReq
             .httpGetUser(endpoint, headers)
-            .done((response) => {
+            .then((response) => {
                 console.log(response);
-                this.dados = response.dados;
-                return this.dados; // Certifique-se de retornar os dados
+                return response.dados; // Retorne os dados diretamente
             })
-            .fail((error) => {
-                console.log("Erro na requisicao: ", error);
-                return [];
+            .catch((error) => {
+                console.error("Erro na requisição: ", error);
+                return []; // Retorne um array vazio em caso de erro para evitar quebrar o código
             });
     }
 
@@ -66,24 +65,7 @@ export class Adm {
         };
         $('#getUsuariosBtn').click(async () => {
             // Simulate fetching data
-            const dados = [
-                // Example data
-                {
-                    "name": "teste",
-                    "idade": " ",
-                    "peso": "60kg",
-                    "altura": " ",
-                    "nome": "mensal",
-                    "segundaFeira": "{\"descanso\":false,\"exercícios\":[{\"nome\":\"Supino\",\"séries\":4,\"repetições\":12,\"peso\":\"10kg\"},{\"nome\":\"Rosca Direta\",\"séries\":3,\"repetições\":10,\"peso\":\"10kg\"},{\"nome\":\"Agachamento\",\"séries\":4,\"repetições\":15,\"peso\":\"10kg\"}]}",
-                    "tercaFeira": "{\"descanso\":false,\"exercícios\":[{\"nome\":\"Cadeira Abdutora\",\"séries\":3,\"repetições\":15,\"peso\":\"10kg\"},{\"nome\":\"Tríceps Testa\",\"séries\":4,\"repetições\":12,\"peso\":\"10kg\"},{\"nome\":\"Remada Curvada\",\"séries\":4,\"repetições\":10,\"peso\":\"10kg\"}]}",
-                    "quartaFeira": "{\"descanso\":false,\"exercícios\":[{\"nome\":\"Elevação Lateral\",\"séries\":3,\"repetições\":12,\"peso\":\"10kg\"},{\"nome\":\"Leg Press\",\"séries\":4,\"repetições\":15,\"peso\":\"10kg\"},{\"nome\":\"Crucifixo\",\"séries\":4,\"repetições\":10,\"peso\":\"10kg\"}]}",
-                    "quintaFeira": "{\"descanso\":false,\"exercícios\":[{\"nome\":\"Desenvolvimento com Halteres\",\"séries\":4,\"repetições\":12,\"peso\":\"10kg\"},{\"nome\":\"Flexão de Braço\",\"séries\":3,\"repetições\":15,\"peso\":\"10kg\"},{\"nome\":\"Cadeira Extensora\",\"séries\":4,\"repetições\":12,\"peso\":\"10kg\"}]}",
-                    "sextaFeira": "{\"descanso\":false,\"exercícios\":[{\"nome\":\"Pullover\",\"séries\":3,\"repetições\":10,\"peso\":\"10kg\"},{\"nome\":\"Puxada Alta\",\"séries\":4,\"repetições\":12,\"peso\":\"10kg\"},{\"nome\":\"Leg Curl\",\"séries\":4,\"repetições\":15,\"peso\":\"10kg\"}]}",
-                    "sabado": "{\"descanso\":false,\"exercícios\":[{\"nome\":\"Stiff\",\"séries\":4,\"repetições\":12,\"peso\":\"10kg\"},{\"nome\":\"Rosca Alternada\",\"séries\":3,\"repetições\":10,\"peso\":\"10kg\"},{\"nome\":\"Panturrilha em Pé\",\"séries\":4,\"repetições\":15,\"peso\":\"10kg\"}]}",
-                    "domingo": "{\"descanso\":true}",
-                    "email": "filhoandre53468100@gmail.com"
-                },
-            ];
+            let dados = await this.getUsuarios();
 
             // Prepares the data for Grid.js
             const gridData = dados.map(user => ([

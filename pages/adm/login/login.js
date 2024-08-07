@@ -86,7 +86,7 @@ class ControllerLogin {
     // Aguarde o término da animação CSS antes de redirecionar
     const animationDuration = 2000; // Duração da animação em milissegundos (2 segundos)
     setTimeout(async () => {
-      await this.checkAuth.checkAndRedirect('admin');
+      this.checkAuth.checkAndRedirect('admin');
     }, animationDuration);
   }
 
