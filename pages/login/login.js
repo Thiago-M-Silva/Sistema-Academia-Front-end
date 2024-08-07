@@ -18,16 +18,16 @@ class ControllerLogin {
     this.listenerLogin();
   }
 
-  handleSignIn(event) {
+  async handleSignIn(event) {
     event.preventDefault();
     const email = $("#username").val();
     const password = $("#password").val();
     const requestData = { email, password };
 
-    this.sendRequest("login", requestData);
+    await this.sendRequest("login", requestData);
   }
 
-  handleSignUp(event) {
+  async handleSignUp(event) {
     event.preventDefault();
     const name = $("#firstname").val() + " " + $("#lastname").val();
     const email = $("#email").val();
@@ -38,23 +38,20 @@ class ControllerLogin {
     const plano = $("#plan").val();
     const requestData = { name, email, password, idade, peso, altura, plano };
 
-    this.sendRequest("registrar", requestData);
+    await this.sendRequest("registrar", requestData);
   }
 
-  sendRequest(endpoint, data) {
-    this.httpReq
-      .httpPost(endpoint, data)
-      .done((response) => {
-        console.log("Dados recebidos:", response);
+  async sendRequest(endpoint, data) {
+    try {
+      const response = await this.httpReq.httpPost(endpoint, data);
+      console.log("Dados recebidos:", response);
 
-
-        // Chama o método para verificar a autenticação e redirecionar
-        this.sucesso();
-      })
-      .fail((error) => {
-        console.error("Erro na requisição:", error);
-        // Aqui você pode lidar com o erro da requisição
-      });
+      // Chama o método para verificar a autenticação e redirecionar
+      await this.sucesso();
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      // Aqui você pode lidar com o erro da requisição
+    }
   }
 
   setupPasswordToggle() {
@@ -80,19 +77,14 @@ class ControllerLogin {
       $(".shape").fadeOut(500).promise()
     ]);
 
-    await Promise.all([
-      $("#login-card").css({
-        "animation": "transicaoSaida 2s forwards"
-      })
-    ]);
-
-    // Após o término das animações, aplique o CSS com a animação desejada
-
+    $("#login-card").css({
+      "animation": "transicaoSaida 2s forwards"
+    });
 
     // Aguarde o término da animação CSS antes de redirecionar
     const animationDuration = 2000; // Duração da animação em milissegundos (2 segundos)
     setTimeout(async () => {
-      this.checkAuth.checkAndRedirect('cliente');
+      await this.checkAuth.checkAndRedirect('cliente');
     }, animationDuration);
   }
 

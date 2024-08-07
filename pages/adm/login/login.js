@@ -2,7 +2,7 @@ import { HttpReq } from "../../../services/httpReq.js";
 import { CheckAuthenticationAndRedirect } from "../../../services/authUtils.js";
 
 class ControllerLogin {
-  //acesso login adm http://127.0.0.1:5500/pages/adm/login/login.html
+  // acesso login adm http://127.0.0.1:5500/pages/adm/login/login.html
   
   httpReq = new HttpReq();
   checkAuth = new CheckAuthenticationAndRedirect();
@@ -31,29 +31,28 @@ class ControllerLogin {
 
   handleSignUp(event) {
     event.preventDefault();
-    const name = $("#firstname").val() +" "+ $("#lastname").val();
+    const name = $("#firstname").val() + " " + $("#lastname").val();
     const email = $("#email").val();
     const password = $("#password_registro").val();
-    const gerente = true; //cenario teste
-    const professor = false; //cenario teste
-    const recepcionista = false; //cenario teste
-    //as informacoes acima sao necessarias para o cadastro de adm
+    const gerente = true; // cenário teste
+    const professor = false; // cenário teste
+    const recepcionista = false; // cenário teste
+    // as informações acima são necessárias para o cadastro de admin
     const requestData = { name, email, password, gerente, professor, recepcionista };
 
     this.sendRequest("registrar", requestData);
   }
-  // postAdm para diferenciar do que e utilizado pelos clientes
-  sendRequest(endpoint, data) {
-    this.httpReq
-      .httpPostAdm(endpoint, data)
-      .done((response) => {
-        console.log("Dados recebidos:", response);
-        this.sucesso();
-      })
-      .fail((error) => {
-        console.error("Erro na requisição:", error);
-        // Aqui você pode lidar com o erro da requisição
-      });
+
+  // postAdm para diferenciar do que é utilizado pelos clientes
+  async sendRequest(endpoint, data) {
+    try {
+      const response = await this.httpReq.httpPostAdm(endpoint, data);
+      console.log("Dados recebidos:", response);
+      this.sucesso();
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      // Aqui você pode lidar com o erro da requisição
+    }
   }
 
   setupPasswordToggle() {
@@ -62,7 +61,7 @@ class ControllerLogin {
       const $passwordField = $("#" + targetId);
 
       if ($passwordField.attr("type") === "password") {
-        $passwordField.attr("type", "text");  
+        $passwordField.attr("type", "text");
         $(this).text("Esconder Senha");
       } else {
         $passwordField.attr("type", "password");

@@ -2,81 +2,71 @@ import { HttpReq } from "../../services/httpReq.js";
 import { CheckAuthenticationAndRedirect } from "../../services/authUtils.js";
 
 class Client {
-    constructor(){
+    constructor() {
         this.httpReq = new HttpReq();
         this.checkRed = new CheckAuthenticationAndRedirect();
         this.jwt = localStorage.getItem('jwt');
         this.dados = {};
     }
 
-    logout(){
+    // Método para criar headers com JWT
+    criarHeaders() {
+        return {
+            'Authorization': 'Bearer ' + this.jwt
+        };
+    }
+
+    async logout() {
         const endpoint = 'logout';
-        const headers = {
-            'Authorization': 'Bearer ' + this.jwt
-        };
-        this.httpReq
-            .httpGet(endpoint, headers)
-            .done((response) => {
-                console.log(response);
-                localStorage.removeItem('jwt'); // Remover o JWT após logout
-                this.checkRed.checkAndRedirect(); // Agora sem parâmetro, deve redirecionar para login
-            })
-            .fail((error) => {
-                console.log("Erro na requisicao: ", error);
-            });
+        try {
+            const response = await this.httpReq.httpGet(endpoint, this.criarHeaders());
+            console.log(response);
+            localStorage.removeItem('jwt'); // Remover o JWT após logout
+            this.checkRed.checkAndRedirect(); // Agora sem parâmetro, deve redirecionar para login
+        } catch (error) {
+            console.log("Erro na requisição: ", error);
+        }
     }
 
-    getTreino() {
+    async getTreino() {
         const endpoint = 'treino';
-        const headers = {
-            'Authorization': 'Bearer ' + this.jwt
-        };
-        return new Promise((resolve, reject) => {
-            this.httpReq
-                .httpGet(endpoint, headers)
-                .done((response) => {
-                    console.log(response);
-                    console.log(response.dados);
-                    this.dados = response.dados;
-                    resolve(this.dados);
-                })
-                .fail((error) => {
-                    console.log("Erro na requisição: ", error);
-                    reject(error);
-                });
-        });
+        try {
+            const response = await this.httpReq.httpGet(endpoint, this.criarHeaders());
+            console.log(response);
+            this.dados = response.dados;
+            return this.dados;
+        } catch (error) {
+            console.log("Erro na requisição: ", error);
+            throw error;
+        }
     }
 
-    attTreino(body) {
+    async attTreino(body) {
         const endpoint = 'treino';
-        const headers = {
-            'Authorization': 'Bearer ' + this.jwt
-        };
-        
         console.log(body);
-        return this.httpReq.httpPutJwt(endpoint, headers, body);
+        try {
+            return await this.httpReq.httpPutJwt(endpoint, this.criarHeaders(), body);
+        } catch (error) {
+            console.log("Erro na requisição: ", error);
+            throw error;
+        }
     }
-    delTreino(){
+
+    async delTreino() {
         const endpoint = 'treino';
-        const headers = {
-            'Authorization': 'Bearer ' + this.jwt
-        };
-        this.httpReq
-            .httpDelete(endpoint, headers)
-            .done((response) => {
-                console.log(response);
-            })
-            .fail((error) => {
-                console.log("Erro na requisicao: ", error);
-            });
+        try {
+            const response = await this.httpReq.httpDelete(endpoint, this.criarHeaders());
+            console.log(response);
+        } catch (error) {
+            console.log("Erro na requisição: ", error);
+        }
     }
-    
-    onInit(){
+
+    onInit() {
         this.checkRed.saiInvasor();
     }
 
-    listener(){
-        // Associando os botões aos métodos da classe
+    listener() {
         document.getElementById('logoutBtn').onclick = () => {
             Swal.fire({
                 title: 'Tem certeza?',
@@ -87,23 +77,14 @@ class Client {
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    client.logout();
+                    this.logout();
                 }
             });
         };
-        
-      
-       // Quando o botão 'attTreinoBtn' é clicado
-        $('#attTreinoBtn').click(function() {
-            // Mostrar o modal
+
+        $('#attTreinoBtn').click(() => {
             $('#treinoModal').modal('show');
-
-            // Remover o evento de clique antigo (se houver)
-            $('#salvarTreinoBtn').off('click');
-
-            // Adicionar o novo evento de clique para 'salvarTreinoBtn'
-            $('#salvarTreinoBtn').click(async function() {
-                // Coletar os dados do formulário
+            $('#salvarTreinoBtn').off('click').click(async () => {
                 const treinoData = {
                     'segunda-feira': $('#segunda-feira').val(),
                     'terca-feira': $('#terca-feira').val(),
@@ -115,28 +96,22 @@ class Client {
                 };
 
                 try {
-                    // Chamar o método attTreino com os dados do formulário
-                    client.attTreino(treinoData);
-                    console.log(treinoData)
-                    // Fechar o modal
+                    await this.attTreino(treinoData);
+                    console.log(treinoData);
                     $('#treinoModal').modal('hide');
                 } catch (error) {
                     console.log("Erro na requisição: ", error);
-                    // O SweetAlert será chamado automaticamente no httpPutJwt em caso de falha
                 }
             });
         });
-        
-        $('#getTreinoBtn').click(async function() {
+
+        $('#getTreinoBtn').click(async () => {
             try {
-                // Executar a requisição e aguardar a resposta
-                let dados = await client.getTreino();
-        
-                // Preencher a tabela com os dados
-                let tabelaCorpo = $('#treinoTabelaCorpo');
+                const dados = await this.getTreino();
+                const tabelaCorpo = $('#treinoTabelaCorpo');
                 tabelaCorpo.empty(); // Limpar o conteúdo atual da tabela
-        
-                for (let dia in dados) {
+
+                for (const dia in dados) {
                     tabelaCorpo.append(`
                         <tr>
                             <td>${dia.charAt(0).toUpperCase() + dia.slice(1).replace(/([A-Z])/g, ' $1').toLowerCase()}</td>
@@ -144,15 +119,12 @@ class Client {
                         </tr>
                     `);
                 }
-        
-                // Mostrar o modal após preencher a tabela
+
                 $('#treinoModalVisualizacao').modal('show');
             } catch (error) {
                 console.error('Erro ao obter dados do treino:', error);
-                // O SweetAlert será chamado automaticamente no httpGet em caso de falha
             }
         });
-        
     }
 }
 
@@ -160,4 +132,3 @@ class Client {
 const client = new Client();
 client.listener();
 client.onInit();
-
