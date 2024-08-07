@@ -25,3 +25,27 @@ O projeto esta organizado nas seguintes pastas: assets, imports, pages e service
 - imports: arquivos para a importacao das bibliotecas necessarias no projeto
 - pages: pastas para a construcao de paginas do projeto, sendo login, client e adm (sendo que adm possui uma pagina de login/cadastro próprio)
 - services: classes Js com funcionalidades comuns ao sistema (funcoes de redirecionamento e requisicoes)
+
+## Lista de Tarefas
+
+### Problemas Identificados
+
+1. **Autorização de Logout**
+   - **Descrição:** O administrador (adm) não possui autorização para realizar o logout do sistema.
+   - **Impacto:** Prejudica a capacidade do administrador de sair do sistema de forma segura.
+
+2. **Alertas de Sucesso**
+   - **Descrição:** Não é disparado um alerta para confirmar o sucesso ao alterar a tabela de treino ou ao cadastrar um novo usuário.
+   - **Impacto:** Falta de feedback para o usuário sobre o sucesso das operações realizadas.
+
+3. **Duplicação de Login**
+   - **Descrição:** É necessário realizar login duas vezes para acessar a página desejada.
+   - **Impacto:** Aumenta a complexidade e frustração do usuário ao usar o sistema.
+4. **Redirecionamento Indevido**
+
+   - **Descrição:** Após realizar o login como administrador, o sistema redireciona para a página de login do cliente.
+   - **Impacto:** Impede que o administrador acesse a página correta e funcionalidade esperada.
+
+5. **Gerenciamento de Usuários**
+   - **Descrição:** A funcionalidade de gerenciar usuários não realiza nenhuma ação além da visualização dos mesmos.
+   - **Impacto:** O administrador não consegue realizar operações administrativas necessárias sobre os usuários.
