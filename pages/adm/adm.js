@@ -50,8 +50,20 @@ export class Adm {
 
 
     listener() {
-        document.getElementById('logoutBtn').onclick = () => this.logout();
-
+        document.getElementById('logoutBtn').onclick = () => {
+            Swal.fire({
+                title: 'Tem certeza?',
+                text: "Você realmente quer sair?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, sair',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.logout();
+                }
+            });
+        };
         $('#getUsuariosBtn').click(async () => {
             // Simulate fetching data
             const dados = [
