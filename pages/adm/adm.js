@@ -42,7 +42,7 @@ export class Adm {
                 return [];
             });
     }
-    
+
 
     onInit() {
         this.checkRed.saiInvasor();
@@ -51,7 +51,7 @@ export class Adm {
 
     listener() {
         document.getElementById('logoutBtn').onclick = () => this.logout();
-    
+
         $('#getUsuariosBtn').click(async () => {
             // Simulate fetching data
             const dados = [
@@ -72,7 +72,7 @@ export class Adm {
                     "email": "filhoandre53468100@gmail.com"
                 },
             ];
-    
+
             // Prepares the data for Grid.js
             const gridData = dados.map(user => ([
                 user.name,
@@ -89,7 +89,7 @@ export class Adm {
                 user.domingo,
                 user.email,
             ]));
-    
+
             // Initialize Grid.js
             new gridjs.Grid({
                 columns: [
@@ -115,9 +115,9 @@ export class Adm {
                 search: true,
                 sort: true
             }).render(document.getElementById('grid'));
-    
+
             $('#dataModal').modal('show');
-    
+
             // Handle save button click
             $('#saveChanges').on('click', () => {
                 const updatedData = gridData.map(row => ({
@@ -134,14 +134,13 @@ export class Adm {
                     domingo: row[11],
                     email: row[12]
                 }));
-    
+
                 // Do something with updatedData, e.g., send to server
                 console.log('Updated Data:', updatedData);
             });
-    
+
             setTimeout(() => {
                 $('[data-column-id="nome"]').click();
-
             }, 200);
 
             // Handle delete button click
@@ -150,8 +149,8 @@ export class Adm {
             });
         });
     }
-    
-    
+
+
 }
 
 const adm = new Adm();
